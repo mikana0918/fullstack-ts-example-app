@@ -21,14 +21,17 @@
     "migrate:dev": "npm run migrate:dev --prefix server",
     "migrate:dev:createonly": "npm run migrate:dev:createonly --prefix server",
     "migrate:reset": "npm run migrate:reset --prefix server",
-    "seed": "npm run seed --prefix server",
     "start": "run-p start:*",
     "start:client": "next start",
     "start:server": "npm start --prefix server",
     "pretest": "npm run generate",
     "test": "jest",
+    "db:seed": "npx prisma db seed",
     "pretypecheck": "npm run generate",
     "typecheck": "tsc --noEmit && tsc --noEmit -p server"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"}  server/prisma/seed.ts"
   },
   "dependencies": {
     "@aspida/axios": "^1.11.0",
@@ -51,7 +54,7 @@
     "@fastify/cors": "^8.2.0",
     "@testing-library/react": "^13.3.0",
     "@types/jest": "^29.2.3",
-    "@types/node": "^18.11.9",
+    "@types/node": "^18.11.17",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
     "@typescript-eslint/eslint-plugin": "^5.44.0",
@@ -76,6 +79,6 @@
     "ts-jest": "^29.0.3",
     "ts-loader": "^8.4.0",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.4"
   }
 }
