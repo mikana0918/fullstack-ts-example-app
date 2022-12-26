@@ -11,9 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      # see: https://github.com/actions/setup-node/issues/32#issuecomment-539794249
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
       - uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
       - uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.API_DEPLOY_SSH_KEY }}
