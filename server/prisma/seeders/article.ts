@@ -4,8 +4,8 @@ const prisma = new PrismaClient()
 export async function main() {
   const article1 = await prisma.article.upsert({
     create: {
-      title: "これはサンプルタイトル1です",
-      body: "これはbody1です"
+      title: 'これはサンプルタイトル1です',
+      body: 'これはbody1です'
     },
     where: {
       id: 1
@@ -15,8 +15,8 @@ export async function main() {
 
   const article2 = await prisma.article.upsert({
     create: {
-      title: "これはサンプルタイトル2です",
-      body: "これはbody2です"
+      title: 'これはサンプルタイトル2です',
+      body: 'これはbody2です'
     },
     where: {
       id: 2

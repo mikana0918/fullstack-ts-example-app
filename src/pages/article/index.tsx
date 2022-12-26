@@ -34,7 +34,6 @@ const ArticleList: NextPage = () => {
               </span>
             )}
             <ul>
-              
               {articleList.map((article) => (
                 <li key={article.id}>
                   <Link

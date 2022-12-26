@@ -29,8 +29,8 @@ module.exports = {
       user: process.env.API_DEPLOY_USER,
       host: process.env.API_DEPLOY_HOST,
       repo: process.env.API_DEPLOY_REPO,
-      ref: "origin/main",
-      path: "/opt/apiserver",
+      ref: 'origin/main',
+      path: '/opt/apiserver',
       ssh_options: ['StrictHostKeyChecking=no'],
       'pre-deploy-local': '',
       'post-deploy': [
