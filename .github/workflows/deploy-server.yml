@@ -25,6 +25,7 @@ jobs:
           # If known_hosts needs to be set, use this.
           known_hosts: ${{ secrets.API_DEPLOY_KNOWN_HOSTS }}
       - run: |
+          pwd
           npm install -g pm2@^4.5.1
           npx pm2 deploy production setup || true
           npx pm2 deploy production update
