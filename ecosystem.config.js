@@ -34,6 +34,9 @@ module.exports = {
       ssh_options: ['StrictHostKeyChecking=no'],
       'pre-deploy-local': '',
       'post-deploy': [
+        'echo postdeploy',
+        'nvm use',
+        'npm',
         'npm install --production=false',
         'npm install --prefix server --production=false',
         'npm run build:server',
