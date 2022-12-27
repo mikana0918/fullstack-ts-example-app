@@ -33,7 +33,7 @@ module.exports = {
       path: '/opt/apiserver',
       ssh_options: ['StrictHostKeyChecking=no'],
       'pre-deploy-local': '',
-      'post-deploy': 'npm install --production=false',
+      'post-deploy': 'sudo npm install --production=false',
       // 'post-deploy': [
       //   'npm install --production=false',
       //   'npm install --prefix server --production=false',
