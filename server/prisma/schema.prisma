@@ -14,7 +14,7 @@ model Task {
 }
 
 model Article {
-  id Int @id @default(autoincrement())
-  title String 
-  body String
+  id    Int    @id @default(autoincrement())
+  title String
+  body  String
 }
