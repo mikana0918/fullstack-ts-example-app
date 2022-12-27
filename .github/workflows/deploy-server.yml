@@ -23,7 +23,7 @@ jobs:
           key: ${{ secrets.API_DEPLOY_SSH_KEY }}
           name: id_rsa
           # If known_hosts needs to be set, use this.
-          # known_hosts: ${{ secrets.API_DEPLOY_KNOWN_HOSTS }}
+          known_hosts: ${{ secrets.API_DEPLOY_KNOWN_HOSTS }}
       - run: |
           npm install -g pm2@^4.5.1
           npx pm2 deploy production setup || true
