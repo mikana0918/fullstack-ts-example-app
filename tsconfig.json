@@ -6,7 +6,6 @@
     "paths": {
       "~/*": ["./src/*"],
       "$/*": ["./server/*"],
-      "$prisma/*": ["./server/node_modules/.prisma/*"]
     },
     "allowJs": true,
     "skipLibCheck": true,
