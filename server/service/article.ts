@@ -27,8 +27,8 @@ export const getArticles = async (search?: string) => {
   )
 }
 
-export const getArticle = (id: number) => {
-  return prisma.article.findFirst({
+export const getArticle = async (id: number) => {
+  return await prisma.article.findFirst({
     where: { id }
   })
 }
