@@ -33,13 +33,14 @@ module.exports = {
       path: '/opt/apiserver',
       ssh_options: ['StrictHostKeyChecking=no'],
       'pre-deploy-local': '',
-      'post-deploy': [
-        'npm install --production=false',
-        'npm install --prefix server --production=false',
-        'npm run build:server',
-        'npm run migrate:deploy --prefix server',
-        'npx pm2 startOrRestart ecosystem.config.js --env production'
-      ].join(' && '),
+      'post-deploy': 'npm install --production=false',
+      // 'post-deploy': [
+      //   'npm install --production=false',
+      //   'npm install --prefix server --production=false',
+      //   'npm run build:server',
+      //   'npm run migrate:deploy --prefix server',
+      //   'npx pm2 startOrRestart ecosystem.config.js --env production'
+      // ].join(' && '),
       'pre-setup': '',
       env: {
         NODE_ENV: 'production',
