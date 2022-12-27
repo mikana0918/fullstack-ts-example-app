@@ -1,26 +1,12 @@
 import { PrismaClient } from '@prisma/client'
+import { main as seedTasks } from './seeders/tasks'
+import { main as seedArticles } from './seeders/article'
+
 const prisma = new PrismaClient()
 
 async function main() {
-  const task1 = await prisma.task.upsert({
-    where: { id: 1 },
-    update: {},
-    create: {
-      label: 'task1',
-      done: true
-    }
-  })
-
-  const task2 = await prisma.task.upsert({
-    where: { id: 2 },
-    update: {},
-    create: {
-      label: 'task2',
-      done: false
-    }
-  })
-
-  console.log({ task1, task2 })
+  await seedTasks()
+  await seedArticles()
 }
 
 main()
