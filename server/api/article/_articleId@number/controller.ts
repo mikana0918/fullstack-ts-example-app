@@ -9,6 +9,5 @@ export default defineController(() => ({
             status: 200 as const,
             body: article
           }
-        : { status: 404 as const })
-      (await getArticle(articleId))
+        : { status: 404 as const })(await getArticle(articleId))
 }))
