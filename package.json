@@ -18,6 +18,7 @@
     "generate:server": "npm run generate --prefix server",
     "lint": "eslint --ext .ts,.js,.tsx . && prettier --check \"./**/*.{ts,js,tsx}\"",
     "lint:fix": "eslint --ext .ts,.js,.tsx . --fix && prettier --write \"./**/*.{ts,js,tsx}\"",
+    "migrate:deploy": "npx prisma migrate deploy",
     "migrate:dev": "npm run migrate:dev --prefix server",
     "migrate:dev:createonly": "npm run migrate:dev:createonly --prefix server",
     "migrate:reset": "npm run migrate:reset --prefix server",
@@ -31,6 +32,7 @@
     "typecheck": "tsc --noEmit && tsc --noEmit -p server"
   },
   "prisma": {
+    "schema": "server/prisma/schema.prisma",
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"}  server/prisma/seed.ts"
   },
   "dependencies": {
