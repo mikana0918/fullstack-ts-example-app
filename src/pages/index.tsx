@@ -39,7 +39,7 @@ const Home: NextPage = () => {
   }, [])
 
   if (error) return <div>failed to load</div>
-  if (!tasks) return <div>loading...</div>
+  // if (!tasks) return <div>loading...</div>
 
   return (
     <Layout>
@@ -58,7 +58,7 @@ const Home: NextPage = () => {
           <input value={label} type="text" onChange={inputLabel} />
           <input type="submit" value="ADD" />
         </form>
-        <ul className={styles.tasks}>
+        {tasks && <ul className={styles.tasks}>
           {tasks.map((task) => (
             <li key={task.id}>
               <label>
@@ -77,7 +77,7 @@ const Home: NextPage = () => {
               />
             </li>
           ))}
-        </ul>
+        </ul>}
       </div>
     </Layout>
   )
