@@ -58,26 +58,28 @@ const Home: NextPage = () => {
           <input value={label} type="text" onChange={inputLabel} />
           <input type="submit" value="ADD" />
         </form>
-        {tasks && <ul className={styles.tasks}>
-          {tasks.map((task) => (
-            <li key={task.id}>
-              <label>
+        {tasks && (
+          <ul className={styles.tasks}>
+            {tasks.map((task) => (
+              <li key={task.id}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={task.done}
+                    onChange={() => toggleDone(task)}
+                  />
+                  <span>{task.label}</span>
+                </label>
                 <input
-                  type="checkbox"
-                  checked={task.done}
-                  onChange={() => toggleDone(task)}
+                  type="button"
+                  value="DELETE"
+                  style={{ float: 'right' }}
+                  onClick={() => deleteTask(task)}
                 />
-                <span>{task.label}</span>
-              </label>
-              <input
-                type="button"
-                value="DELETE"
-                style={{ float: 'right' }}
-                onClick={() => deleteTask(task)}
-              />
-            </li>
-          ))}
-        </ul>}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </Layout>
   )
