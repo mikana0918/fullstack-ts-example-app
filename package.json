@@ -38,6 +38,7 @@
   "dependencies": {
     "@aspida/axios": "^1.11.0",
     "@aspida/swr": "^1.11.0",
+    "@aws-amplify/ui-react": "^4.3.2",
     "@fastify/helmet": "^10.1.0",
     "@fastify/jwt": "^6.5.0",
     "@fastify/multipart": "^7.3.0",
