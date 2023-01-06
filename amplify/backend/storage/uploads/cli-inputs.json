@@ -1,0 +1,14 @@
+{
+  "resourceName": "uploads",
+  "policyUUID": "47a34be6",
+  "bucketName": "frourio-sample-uploads",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}
