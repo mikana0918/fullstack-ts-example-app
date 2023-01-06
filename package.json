@@ -43,6 +43,7 @@
     "@fastify/multipart": "^7.3.0",
     "@fastify/static": "^6.6.0",
     "@prisma/client": "^4.6.1",
+    "aws-amplify": "^5.0.8",
     "axios": "^0.27.2",
     "next": "^13.0.4",
     "node-dev": "^7.4.3",
