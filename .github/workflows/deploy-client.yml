@@ -32,6 +32,9 @@ jobs:
           key: client-npm-${{ hashFiles('yarn.lock') }}
       - run: yarn install
         if: steps.client-npm-cache.outputs.cache-hit != 'true'
+      - name: Setup Amplify Backends
+        run: |
+          amplify pull --appId d115dbcw0d9yj9 --envName prod
       - run: yarn run build:client
         env:
           API_ORIGIN: ${{ secrets.API_ORIGIN }}
