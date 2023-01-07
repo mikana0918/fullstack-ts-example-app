@@ -38,14 +38,7 @@ jobs:
       - run: npm install --prefix server
         if: steps.server-npm-cache.outputs.cache-hit != 'true'
       - name: Pull amplify configs
-        uses: ambientlight/amplify-cli-action@0.3.0
-        with:
-          amplify_command: env checkout prod
-          amplify_env: prod
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ap-northeast-1
+        run: amplify env checkout prod
       - run: npm run lint
       - run: |
           sudo systemctl start mysql.service
