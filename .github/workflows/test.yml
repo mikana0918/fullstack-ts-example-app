@@ -24,6 +24,8 @@ jobs:
           npm config set prefix '~/.npm-global'
           export PATH=~/.npm-global/bin:$PATH
           source ~/.profile
+          source ~/.bashrc
+          source ~/.bash_profile
           npm install -g @aws-amplify/cli
       # see: https://github.com/actions/setup-node/issues/32#issuecomment-539794249
       - name: Read .nvmrc
