@@ -43,6 +43,8 @@ jobs:
         if: steps.client-npm-cache.outputs.cache-hit != 'true'
       - run: npm install --prefix server
         if: steps.server-npm-cache.outputs.cache-hit != 'true'
+      - name: Pull amplify configure
+        run: ~/.npm-global/bin/amplify configure
       - name: Pull amplify configs
         run: ~/.npm-global/bin/amplify env checkout prod
       - run: npm run lint
