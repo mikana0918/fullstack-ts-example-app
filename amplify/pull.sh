@@ -25,23 +25,23 @@ AWSCLOUDFORMATIONCONFIG="{\
 \"configLevel\":\"project\",\
 \"useProfile\":false,\
 \"profileName\":\"default\",\
-\"accessKeyId\":$access_key_id,\
-\"secretAccessKey\":$secret_access_key,\
+\"accessKeyId\":\"$access_key_id\",\
+\"secretAccessKey\":\"$secret_access_key\",\
 \"region\":\"ap-northeast-1\"\
 }"
 AMPLIFY="{\
 \"projectName\":\"frourio-sample\",\
 \"appId\":\"d115dbcw0d9yj9\",\
-\"envName\":$env,\
+\"envName\":\"$env\",\
 \"defaultEditor\":\"code\"\
 }"
 FRONTEND="{\
 \"frontend\":\"javascript\",\
 \"framework\":\"react\",\
-\"config\":$REACTCONFIG\
+\"config\":\"$REACTCONFIG\"\
 }"
 PROVIDERS="{\
-\"awscloudformation\":$AWSCLOUDFORMATIONCONFIG\
+\"awscloudformation\":\"$AWSCLOUDFORMATIONCONFIG\"\
 }"
 
 $amplify_bin_path/amplify pull \
