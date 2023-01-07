@@ -24,17 +24,20 @@ jobs:
         with:
           path: 'node_modules'
           key: client-npm-${{ hashFiles('yarn.lock') }}
-      - run: yarn install
+      - run: npm install
         if: steps.client-npm-cache.outputs.cache-hit != 'true'
-      # - run: yarn install --prefix server
-      #   if: steps.server-npm-cache.outputs.cache-hit != 'true'
-      - run: yarn run lint
+      - run: npm install --prefix server
+        if: steps.server-npm-cache.outputs.cache-hit != 'true'
+      - name: Setup Amplify Backends
+        run: |
+          amplify pull --appId d115dbcw0d9yj9 --envName prod
+      - run: npm run lint
       - run: |
           sudo systemctl start mysql.service
           echo "API_DATABASE_URL=mysql://root:root@localhost:3306/test" > server/prisma/.env
-      - run: yarn run typecheck
+      - run: npm run typecheck
       - run: |
-          yarn run migrate:dev
-          yarn test
+          npm run migrate:dev
+          npm run test
         env:
           API_JWT_SECRET: test_secret
