@@ -1,3 +1,28 @@
+## Architecture Overview
+![alt text](https://github.com/mikana0918/fullstack-ts-example-app/blob/main/concet.drawio.svg)
+
+- Infra (90% Terraform Managed)
+  - EC2 (Node.js)
+  - RDS (MySQL)
+  - ALB
+  - ACM
+  - Amplify
+  - S3 (Only for tfstate store)
+- Infra (Amplify managed CloudFormation stack)
+  - Cognito
+  - S3 (for backend object storage)
+- Hosting 
+  - Github Pages
+- CI/CD
+  - Github Actions / Amplify CI
+- Backend
+  - TypeScript
+  - Frourio (Fastify, Prisma)
+- Frontend
+  - TypeScript
+  - Next.js
+  - Frourio (Aspida, Pathpida)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
