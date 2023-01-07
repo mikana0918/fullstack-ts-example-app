@@ -12,6 +12,12 @@ jobs:
       API_BASE_PATH: /api
     steps:
       - uses: actions/checkout@v2
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
       # see: https://github.com/actions/setup-node/issues/32#issuecomment-539794249
       - name: Read .nvmrc
         run: echo ::set-output name=NVMRC::$(cat .nvmrc)
@@ -30,6 +36,7 @@ jobs:
         if: steps.server-npm-cache.outputs.cache-hit != 'true'
       - name: Setup Amplify Backends
         run: |
+          npm i -g @aws-amplify/cli
           amplify pull --appId d115dbcw0d9yj9 --envName prod
       - run: npm run lint
       - run: |
