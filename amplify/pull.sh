@@ -10,6 +10,11 @@ secret_access_key=$3
 # ex: ~/.npm-global/bin
 amplify_bin_path=$4
 
+echo $env
+echo $access_key_id
+echo $secret_access_key
+echo $amplify_bin_path
+
 REACTCONFIG="{\
 \"SourceDir\":\"src\",\
 \"DistributionDir\":\"out\",\
