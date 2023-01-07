@@ -44,7 +44,7 @@ PROVIDERS="{\
 \"awscloudformation\":\"$AWSCLOUDFORMATIONCONFIG\"\
 }"
 
-$amplify_bin_path/amplify pull \
+$amplify_bin_path/amplify init \
 --amplify $AMPLIFY \
 --frontend $FRONTEND \
 --providers $PROVIDERS \
