@@ -22,7 +22,6 @@ export const getUserFromAuthHeader = async ({
 
   try {
     const accessToken = headers.authorization.split(' ')[1]
-    console.log(accessToken)
 
     const { data: cognitoUser } = await axios.post<ICognitoUser>(
       COGNITO_URL,
