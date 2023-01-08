@@ -1,12 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import type { MultipartFile } from '@fastify/multipart'
-import {
-  API_ORIGIN,
-  API_USER_ID,
-  API_USER_PASS,
-  API_UPLOAD_DIR
-} from '../../service/envValues'
+import { API_ORIGIN, API_USER_ID, API_USER_PASS, API_UPLOAD_DIR } from '$/env'
 
 const iconsDir = API_UPLOAD_DIR && path.resolve(API_UPLOAD_DIR, 'icons')
 
