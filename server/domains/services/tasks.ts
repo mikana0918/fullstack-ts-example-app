@@ -10,8 +10,8 @@ export const getTasks = depend(
     (await prisma.task.findMany()).slice(0, limit)
 )
 
-export const createTask = (label: Task['label']) =>
-  prisma.task.create({ data: { label } })
+export const createTask = (l: string) =>
+  prisma.task.create({ data: { label: l } })
 
 export const updateTask = (
   id: Task['id'],

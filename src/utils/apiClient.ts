@@ -9,7 +9,7 @@ instance.interceptors.request.use(async (config) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const token = await AmplifyAuthModule.getCurrentToken()
 
-  config.headers = { Authorization: `Bearer ${token}` }
+  config.headers = { ...config.headers, Authorization: `Bearer ${token}` }
 
   return config
 })
