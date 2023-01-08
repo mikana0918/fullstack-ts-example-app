@@ -6,7 +6,7 @@ import {
   API_USER_ID,
   API_USER_PASS,
   API_UPLOAD_DIR
-} from './envValues'
+} from '../../service/envValues'
 
 const iconsDir = API_UPLOAD_DIR && path.resolve(API_UPLOAD_DIR, 'icons')
 
