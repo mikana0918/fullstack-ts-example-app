@@ -1,4 +1,4 @@
-import type { ArticleInfo } from '$/service/article'
+import type { ArticleInfo } from '$/domains/services/article'
 
 export type Methods = {
   get: {
