@@ -1,0 +1,23 @@
+{
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-frouriosample-prod-82334-authRole",
+      "UnauthRoleArn": "arn:aws:iam::098510440236:role/amplify-frouriosample-prod-82334-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::098510440236:role/amplify-frouriosample-prod-82334-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-frouriosample-prod-82334-deployment",
+      "UnauthRoleName": "amplify-frouriosample-prod-82334-unauthRole",
+      "StackName": "amplify-frouriosample-prod-82334",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:098510440236:stack/amplify-frouriosample-prod-82334/69d83de0-8d9b-11ed-ae2b-0a54259d13d9",
+      "AmplifyAppId": "d115dbcw0d9yj9"
+    },
+    "categories": {
+      "auth": {
+        "frouriosample": {}
+      },
+      "storage": {
+        "uploads": {}
+      }
+    }
+  }
+}

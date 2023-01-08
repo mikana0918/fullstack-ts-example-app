@@ -11,6 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
+      - name: Setup AWS Amplify CLI
+        run: |
+          mkdir ~/.npm-global
+          npm config set prefix '~/.npm-global'
+          export PATH=~/.npm-global/bin:$PATH
+          source ~/.profile
+          source ~/.bashrc
+          source ~/.bash_profile
+          npm install -g @aws-amplify/cli
       # see: https://github.com/actions/setup-node/issues/32#issuecomment-539794249
       - name: Read .nvmrc
         run: echo ::set-output name=NVMRC::$(cat .nvmrc)
@@ -24,6 +39,9 @@ jobs:
           name: id_rsa
           # If known_hosts needs to be set, use this.
           known_hosts: ${{ secrets.API_DEPLOY_KNOWN_HOSTS }}
+      # TODO: apply this if we need to add amplify to backend
+      # - name: Setup Amplify with headless mode
+      #   run: sh ./amplify/init.sh prod ${{ secrets.AWS_ACCESS_KEY_ID }} ${{ secrets.AWS_SECRET_ACCESS_KEY }} ~/.npm-global/bin
       - run: |
           npm install -g pm2@^4.5.1
           npx pm2 deploy production setup || true
