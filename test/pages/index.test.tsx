@@ -4,10 +4,12 @@ import cors from '@fastify/cors'
 import aspida from '@aspida/axios'
 import api from '$/api/$api'
 import Home from '~/pages/index'
-import { render, fireEvent, waitFor } from '../testUtils'
+import { render, waitFor } from '../testUtils'
+import { AmplifyAuthModule } from '~/app/services/auth'
 
 dotenv.config({ path: 'server/.env' })
 jest.mock('next/router', () => require('next-router-mock'))
+jest.spyOn(AmplifyAuthModule, 'getCurrentToken').mockResolvedValue('some-token')
 
 const apiClient = api(aspida(undefined, { baseURL: process.env.API_BASE_PATH }))
 const res = function <T extends () => unknown>(
@@ -49,22 +51,22 @@ describe('Home page', () => {
     expect(await findByText('bar task')).toBeTruthy()
   })
 
-  it('clicking button triggers prompt', async () => {
-    const { findByText } = render(<Home />)
+  // it('clicking button triggers prompt', async () => {
+  //   const { findByText } = render(<Home />)
 
-    window.prompt = jest.fn()
-    window.alert = jest.fn()
+  //   window.prompt = jest.fn()
+  //   window.alert = jest.fn()
 
-    await waitFor(
-      async () => {
-        await findByText('LOGIN')
-      },
-      { timeout: 5000 }
-    )
-    fireEvent.click(await findByText('LOGIN'))
-    expect(window.prompt).toHaveBeenCalledWith(
-      'Enter the user id (See server/.env)'
-    )
-    expect(window.alert).toHaveBeenCalledWith('Login failed')
-  })
+  //   await waitFor(
+  //     async () => {
+  //       await findByText('LOGIN')
+  //     },
+  //     { timeout: 5000 }
+  //   )
+  //   fireEvent.click(await findByText('LOGIN'))
+  //   expect(window.prompt).toHaveBeenCalledWith(
+  //     'Enter the user id (See server/.env)'
+  //   )
+  //   expect(window.alert).toHaveBeenCalledWith('Login failed')
+  // })
 })

@@ -1,58 +1,44 @@
 import { useState, useCallback } from 'react'
-import styles from '~/styles/UserBanner.module.css'
+import styles from './UserBanner.module.css'
 import { apiClient } from '~/utils/apiClient'
 import type { UserInfo } from '$/types'
 import type { ChangeEvent } from 'react'
 import Link from 'next/link'
 import { pagesPath } from '~/utils/$path'
 import { useRouter } from 'next/router'
+import { AmplifyAuthModule } from '~/app/services/auth'
 
 const UserBanner = () => {
   const router = useRouter()
   const [search, setSearch] = useState('')
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [token, setToken] = useState('')
   const [userInfo, setUserInfo] = useState({} as UserInfo)
 
-  const editIcon = useCallback(
-    async (e: ChangeEvent<HTMLInputElement>) => {
-      if (!e.target.files?.length) return
+  const isLoggedIn = false
 
-      setUserInfo(
-        await apiClient.user.$post({
-          headers: { authorization: token },
-          body: { icon: e.target.files[0] }
-        })
-      )
-    },
-    [token]
-  )
+  const editIcon = () => {
+    console.log('edit icon')
+  }
 
-  const login = useCallback(async () => {
-    const id = prompt('Enter the user id (See server/.env)')
-    const pass = prompt('Enter the user pass (See server/.env)')
-    if (!id || !pass) return alert('Login failed')
+  // const editIcon = useCallback(
+  //   async (e: ChangeEvent<HTMLInputElement>) => {
+  //     if (!e.target.files?.length) return
 
-    let newToken = ''
+  //     setUserInfo(
+  //       await apiClient.user.$post({
+  //         headers: { authorization: token },
+  //         body: { icon: e.target.files[0] }
+  //       })
+  //     )
+  //   },
+  //   [token]
+  // )
 
-    try {
-      newToken = `Bearer ${
-        (await apiClient.token.$post({ body: { id, pass } })).token
-      }`
-      setToken(newToken)
-    } catch (e) {
-      return alert('Login failed')
-    }
+  const login = () => {
+    console.log('login')
+  }
 
-    setUserInfo(
-      await apiClient.user.$get({ headers: { authorization: newToken } })
-    )
-    setIsLoggedIn(true)
-  }, [])
-
-  const logout = useCallback(() => {
-    setToken('')
-    setIsLoggedIn(false)
+  const logout = useCallback(async () => {
+    await AmplifyAuthModule.signOut()
   }, [])
 
   return (
