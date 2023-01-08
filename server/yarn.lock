@@ -1040,7 +1040,7 @@
     "find-up" "^5.0.0"
     "tslib" "^2.4.1"
 
-"esbuild@^0.15.15", "esbuild@0.12 - 0.16":
+"esbuild@^0.15.18", "esbuild@0.12 - 0.16":
   "integrity" "sha512-x/R72SmW3sSFRm5zrrIjAhCeQSAWoni3CmHEqfQrZIQTM3lVCdehdwuIqaOtfC2slvpdlLa62GYoN8SxT23m6Q=="
   "resolved" "https://registry.npmjs.org/esbuild/-/esbuild-0.15.18.tgz"
   "version" "0.15.18"
