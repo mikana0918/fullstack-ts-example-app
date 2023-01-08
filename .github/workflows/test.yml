@@ -44,7 +44,7 @@ jobs:
       - run: npm install --prefix server
         if: steps.server-npm-cache.outputs.cache-hit != 'true'
       - name: Setup Amplify with headless mode
-        run: sh ./amplify/pull.sh prod ${{ secrets.AWS_ACCESS_KEY_ID }} ${{ secrets.AWS_SECRET_ACCESS_KEY }} ~/.npm-global/bin
+        run: sh ./amplify/init.sh prod ${{ secrets.AWS_ACCESS_KEY_ID }} ${{ secrets.AWS_SECRET_ACCESS_KEY }} ~/.npm-global/bin
       - run: npm run lint
       - run: |
           sudo systemctl start mysql.service
