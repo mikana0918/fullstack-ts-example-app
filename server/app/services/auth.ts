@@ -1,17 +1,23 @@
-import axios from "axios"
-import * as Either from "fp-ts/Either";
-import type { Either as IEither } from "fp-ts/Either"
+import axios from 'axios'
+import * as Either from 'fp-ts/Either'
+import type { Either as IEither } from 'fp-ts/Either'
 
 const COGNITO_URL = `https://cognito-idp.ap-northeast-1.amazonaws.com/`
 
 interface ICognitoUser {
-  UserAttributes: { Name: string; value: string; }[]
+  UserAttributes: { Name: string; value: string }[]
   Username: string
 }
 
-export const getUserFromAuthHeader = async ({ headers }: { headers: { authorization: string | null } }): Promise<IEither<Error, { accessToken: string; cognitoUser: ICognitoUser}>> => {
+export const getUserFromAuthHeader = async ({
+  headers
+}: {
+  headers: { authorization: string | null }
+}): Promise<
+  IEither<Error, { accessToken: string; cognitoUser: ICognitoUser }>
+> => {
   if (headers.authorization === null) {
-    throw new Error("authorization header should not be null.")
+    throw new Error('authorization header should not be null.')
   }
 
   try {
@@ -35,12 +41,11 @@ export const getUserFromAuthHeader = async ({ headers }: { headers: { authorizat
       accessToken,
       cognitoUser
     })
-  
   } catch (error) {
     if (error instanceof Error) {
-        return Either.left(error)
+      return Either.left(error)
     } else {
-        return Either.left(new Error('failed'))
+      return Either.left(new Error('failed'))
     }
   }
 }
