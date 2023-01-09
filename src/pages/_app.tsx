@@ -3,21 +3,25 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { staticPath } from '~/utils/$path'
 import { Amplify } from '@aws-amplify/core'
-import { withAuthenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
 import awsExports from '~/aws-exports'
+import { Authenticator } from '@aws-amplify/ui-react'
 
 Amplify.configure(awsExports)
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <>
-      <Head>
-        <link rel="icon" href={staticPath.favicon_png} />
-      </Head>
-      <Component {...pageProps} />
-    </>
+    <Authenticator>
+      {({ user: authUser }) => (
+        <div>
+          <Head>
+            <link rel="icon" href={staticPath.favicon_png} />
+          </Head>
+          <Component authUser={authUser} {...pageProps} />
+        </div>
+      )}
+    </Authenticator>
   )
 }
 
-export default withAuthenticator(MyApp)
+export default MyApp
