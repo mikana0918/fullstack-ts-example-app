@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react'
 import styles from '~/styles/Layout.module.css'
 import { staticPath } from '~/utils/$path'
-import UserBanner from './UserBanner'
+import DefaultHeader from './DefaultHeader'
 
 type LayoutProps = {
   children: ReactNode
@@ -10,7 +10,7 @@ type LayoutProps = {
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <div className={styles.container}>
-      <UserBanner />
+      <DefaultHeader />
       <main className={styles.main}>{children}</main>
       <footer className={styles.footer}>
         <a

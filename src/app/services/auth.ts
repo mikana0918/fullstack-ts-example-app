@@ -2,6 +2,8 @@ import { Amplify } from '@aws-amplify/core'
 
 // @see: https://docs.amplify.aws/lib/auth/emailpassword/q/platform/js/
 export const AmplifyAuthModule = {
+  currentAuthenticatedUser: async () =>
+    await Amplify.Auth.currentAuthenticatedUser(),
   getCurrentToken: async () => {
     try {
       const currentSession = await Amplify.Auth.currentSession()
