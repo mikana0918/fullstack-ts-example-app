@@ -18,6 +18,7 @@ const Home: NextPage = () => {
 
   const createTask = useCallback(
     async (e: FormEvent) => {
+      console.log('createTask')
       e.preventDefault()
       if (!label) return
 
