@@ -5,14 +5,16 @@ import Link from 'next/link'
 import { pagesPath } from '~/utils/$path'
 import { useRouter } from 'next/router'
 import { AmplifyAuthModule } from '~/app/services/auth'
-import { getLastAuthUser } from '~/utils/localStorageClient'
+import { useAuth } from '~/hooks/useAuth'
 
 const DefaultHeader = () => {
   const router = useRouter()
   const [search, setSearch] = useState('')
+
+  // TODO: inject user instance from useAuth()
   const [userInfo, setUserInfo] = useState({} as UserInfo)
 
-  const isLoggedIn = getLastAuthUser() !== null
+  const { isAuthenticated } = useAuth()
 
   const editIcon = () => {
     console.log('edit icon')
@@ -56,7 +58,7 @@ const DefaultHeader = () => {
         </form>
         <div className={styles.spacing} />
         <div>
-          {isLoggedIn ? (
+          {isAuthenticated ? (
             <>
               <img src={userInfo.icon} className={styles.userIcon} />
               <span>{userInfo.name}</span>
