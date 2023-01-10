@@ -18,4 +18,11 @@ export const checkAuth = async (
   if (Either.isLeft(eitherUserOrError)) {
     done(eitherUserOrError.left)
   }
+
+  if (Either.isRight(eitherUserOrError)) {
+    const { cognitoUser } = eitherUserOrError.right
+
+    // populate auth user
+    req.user = cognitoUser
+  }
 }
