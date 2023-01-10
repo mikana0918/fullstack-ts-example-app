@@ -7,3 +7,8 @@ export type UserInfo = {
 export type AuthHeader = {
   authorization: string
 }
+
+export interface ICognitoUser {
+  UserAttributes: { Name: string; value: string }[]
+  Username: string
+}

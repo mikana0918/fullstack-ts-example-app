@@ -1,13 +1,9 @@
 import axios from 'axios'
 import * as Either from 'fp-ts/Either'
 import type { Either as IEither } from 'fp-ts/Either'
+import type { ICognitoUser } from '$/types'
 
 const COGNITO_URL = `https://cognito-idp.ap-northeast-1.amazonaws.com/`
-
-interface ICognitoUser {
-  UserAttributes: { Name: string; value: string }[]
-  Username: string
-}
 
 export const getUserFromAuthHeader = async ({
   headers

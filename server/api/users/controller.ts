@@ -1,13 +1,28 @@
 import { defineController } from './$relay'
-import { getUserInfoById, changeIcon } from '$/domains/services/user'
+import { getUserInfoById, uploadUserIcon } from '$/domains/services/user'
+import type { ICognitoUser } from '$/types'
+import { CognitoUserId } from '$/domains/ValueObjects/Auth/CognitoUserId'
+import type { MultipartFile } from '@fastify/multipart'
+
+export type AdditionalRequest = {
+  user: ICognitoUser
+};
+
+const handlePost = ({ user, file }: { user: ICognitoUser; file: MultipartFile }) => { 
+  const cognitoUserId = new CognitoUserId(user.Username)
+
+  uploadUserIcon({ iconFile: file, cognitoUserId})
+
+  return user
+}
 
 export default defineController(() => ({
   get: (args) => ({
     status: 200,
-    body: getUserInfoById(args.headers.authorization)
+    body: getUserInfoById('HOGE')
   }),
-  post: async (args) => ({
+  post: async ({ user, body }) => ({
     status: 201,
-    body: await changeIcon(args.headers.authorization, args.body.icon)
+    body: handlePost({ user, file: body.file })
   })
 }))

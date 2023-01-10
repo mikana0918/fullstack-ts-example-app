@@ -2,6 +2,9 @@ import fs from 'fs'
 import path from 'path'
 import type { MultipartFile } from '@fastify/multipart'
 import { API_ORIGIN, API_USER_ID, API_USER_PASS, API_UPLOAD_DIR } from '$/env'
+import { s3Service } from '$/app/services/storage/handler'
+import { storagePaths } from '$/app/services/storage/paths'
+import { CognitoUserId } from '$/domains/ValueObjects/Auth/CognitoUserId'
 
 const iconsDir = API_UPLOAD_DIR && path.resolve(API_UPLOAD_DIR, 'icons')
 
@@ -46,4 +49,10 @@ export const changeIcon = async (id: string, iconFile: MultipartFile) => {
     id,
     ...getUserInfo()
   }
+}
+
+export const uploadUserIcon = ({ iconFile, cognitoUserId }: { iconFile: MultipartFile; cognitoUserId: CognitoUserId }) => {
+  const userUploadIconKey = storagePaths.userUploadedIcon(cognitoUserId)
+
+  s3Service.upload({file: iconFile, storageKey: userUploadIconKey })
 }
