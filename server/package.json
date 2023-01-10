@@ -31,10 +31,12 @@
     "@fastify/multipart": "^7.3.0",
     "@fastify/static": "^6.5.1",
     "@prisma/client": "^4.8.1",
+    "aws-sdk": "^2.1290.0",
     "dotenv": "^16.0.3",
     "fastify": "^4.10.2",
     "fp-ts": "^2.13.1",
     "pm2": "^5.1.2",
+    "uuid": "^9.0.0",
     "zod": "^3.19.1"
   },
   "devDependencies": {
