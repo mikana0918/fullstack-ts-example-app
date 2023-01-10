@@ -9,6 +9,7 @@ const API_SERVER_PORT = +(process.env.API_SERVER_PORT ?? '8080')
 const API_BASE_PATH = process.env.API_BASE_PATH ?? ''
 const API_ORIGIN = process.env.API_ORIGIN ?? ''
 const API_UPLOAD_DIR = process.env.API_UPLOAD_DIR ?? ''
+const AWS_S3_BUCKET_USER_UPLOADS = process.env.AWS_S3_BUCKET_USER_UPLOADS ?? ''
 
 export {
   API_JWT_SECRET,
@@ -17,5 +18,6 @@ export {
   API_SERVER_PORT,
   API_BASE_PATH,
   API_ORIGIN,
-  API_UPLOAD_DIR
+  API_UPLOAD_DIR,
+  AWS_S3_BUCKET_USER_UPLOADS
 }
