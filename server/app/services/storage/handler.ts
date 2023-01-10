@@ -1,5 +1,6 @@
 import AWS from 'aws-sdk'
 import { AWS_S3_BUCKET_USER_UPLOADS } from '$/env'
+import * as Either from 'fp-ts/Either'
 
 const s3Client = new AWS.S3({ apiVersion: '2006-03-01' })
 
@@ -22,11 +23,16 @@ export const s3Service = {
       Body: file
     }
     
-    s3Client.upload(request, (err, data) =>  {
+    // TODO: those Either are not returned. AWS returns ManagedUpload
+    return s3Client.upload(request, (err, data) =>  {
       if (err) {
-        console.log("Error", err);
-      } if (data) {
-        console.log("Upload Success", data.Location);
+        console.error("Failed to upload given [file, err]", file, err);
+
+        return Either.left(err)
+      }
+      
+      if (data) {
+        return Either.right(data)
       }
     })
   }

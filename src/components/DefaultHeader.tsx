@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, ChangeEvent } from 'react'
 import styles from './DefaultHeader.module.css'
 import type { UserInfo } from '$/types'
 import Link from 'next/link'
@@ -6,6 +6,7 @@ import { pagesPath } from '~/utils/$path'
 import { useRouter } from 'next/router'
 import { AmplifyAuthModule } from '~/app/services/auth'
 import { useAuth } from '~/hooks/useAuth'
+import { apiClient } from '~/utils/apiClient'
 
 const DefaultHeader = () => {
   const router = useRouter()
@@ -16,8 +17,10 @@ const DefaultHeader = () => {
 
   const { isAuthenticated } = useAuth()
 
-  const editIcon = () => {
-    console.log('edit icon')
+  const editIcon = (evt: ChangeEvent<HTMLInputElement>) => {
+    if (evt.target.files) {
+      apiClient.users.post({ body: { file: evt.target.files[0] } })
+    }
   }
 
   const logout = async () => {

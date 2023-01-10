@@ -51,8 +51,10 @@ export const changeIcon = async (id: string, iconFile: MultipartFile) => {
   }
 }
 
-export const uploadUserIcon = ({ iconFile, cognitoUserId }: { iconFile: MultipartFile; cognitoUserId: CognitoUserId }) => {
-  const userUploadIconKey = storagePaths.userUploadedIcon(cognitoUserId)
+export const uploadUserIcon = async ({ iconFile, cognitoUserId }: { iconFile: MultipartFile; cognitoUserId: CognitoUserId }) => {
+  const userUploadIconKey = storagePaths.userUploadedIcon({fileName: iconFile.filename, cognitoUserId})
 
-  s3Service.upload({file: iconFile, storageKey: userUploadIconKey })
+  const fileBuffer = await iconFile.toBuffer()
+
+  s3Service.upload({ file: fileBuffer, storageKey: userUploadIconKey })
 }
