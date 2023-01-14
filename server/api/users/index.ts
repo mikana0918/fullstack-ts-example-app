@@ -1,15 +1,14 @@
-import type { UserInfo } from '$/types'
+import type { User } from '@prisma/client'
 import type { ReadStream } from 'fs'
-import type { ICognitoUser } from '$/types'
 
 export type Methods = {
   get: {
-    resBody: UserInfo
+    resBody: User | null
   }
 
   post: {
     reqFormat: FormData
     reqBody: { file: File | ReadStream }
-    resBody: ICognitoUser
+    resBody: User
   }
 }

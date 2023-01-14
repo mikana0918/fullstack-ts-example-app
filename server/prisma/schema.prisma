@@ -20,15 +20,7 @@ model Article {
 }
 
 model User {
-  id         Int    @id @default(autoincrement())
-  cognito_id String
-
-  userProfile UserProfile? @relation("UserProfile")
-}
-
-model UserProfile {
-  id Int      @id @default(autoincrement())
-  userId Int  @unique
-
-  user        User @relation(name: "UserProfile", fields: [userId], references: [id])
+  id         Int     @id @default(autoincrement())
+  cognito_id String  @unique
+  icon_path  String?
 }

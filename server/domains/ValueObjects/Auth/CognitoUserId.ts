@@ -10,8 +10,8 @@ export class CognitoUserId {
       schema.parse(cognitoUserName)
 
       this.cognitoUserName = cognitoUserName
-    } catch(err) {
-      throw new Error(`[CognitoUserId.UUID] Failed to init ValueObject: ${err}`);
+    } catch (err) {
+      throw new Error(`[CognitoUserId.UUID] Failed to init ValueObject: ${err}`)
     }
   }
 
@@ -21,5 +21,9 @@ export class CognitoUserId {
 
   public equalsTo(other: CognitoUserId) {
     return other.value === this.value
+  }
+
+  public toString() {
+    return this.cognitoUserName
   }
 }

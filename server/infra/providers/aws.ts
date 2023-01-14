@@ -1,5 +1,9 @@
-import AWS from "aws-sdk"
+import AWS from 'aws-sdk'
+import { AWS_REGION } from '$/env'
 
 export const registerProviderAWS = () => {
-  AWS.config.update({region: 'ap-northeast-1'});
+  AWS.config.update({
+    region: AWS_REGION,
+    s3ForcePathStyle: true
+  })
 }
