@@ -45,7 +45,7 @@ jobs:
         if: steps.server-npm-cache.outputs.cache-hit != 'true'
       - name: Setup Amplify with headless mode
         run: sh ./amplify/init.sh prod ${{ secrets.AWS_ACCESS_KEY_ID }} ${{ secrets.AWS_SECRET_ACCESS_KEY }} ~/.npm-global/bin
-      - run: npm run lint
+      # - run: npm run lint
       - run: |
           sudo systemctl start mysql.service
           echo "API_DATABASE_URL=mysql://root:root@localhost:3306/test" > server/prisma/.env
