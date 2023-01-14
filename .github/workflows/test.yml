@@ -11,7 +11,10 @@ jobs:
       API_ORIGIN: http://localhost:8080
       API_BASE_PATH: /api
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
