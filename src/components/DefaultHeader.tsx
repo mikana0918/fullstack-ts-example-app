@@ -1,6 +1,5 @@
 import { useState, ChangeEvent } from 'react'
 import styles from './DefaultHeader.module.css'
-import type { UserInfo } from '$/types'
 import Link from 'next/link'
 import { pagesPath } from '~/utils/$path'
 import { useRouter } from 'next/router'
@@ -11,15 +10,11 @@ import { apiClient } from '~/utils/apiClient'
 const DefaultHeader = () => {
   const router = useRouter()
   const [search, setSearch] = useState('')
+  const { user } = useAuth()
 
-  // TODO: inject user instance from useAuth()
-  const [userInfo, setUserInfo] = useState({} as UserInfo)
-
-  const { isAuthenticated } = useAuth()
-
-  const editIcon = (evt: ChangeEvent<HTMLInputElement>) => {
+  const editIcon = async (evt: ChangeEvent<HTMLInputElement>) => {
     if (evt.target.files) {
-      apiClient.users.post({ body: { file: evt.target.files[0] } })
+      await apiClient.users.post({ body: { file: evt.target.files[0] } })
     }
   }
 
@@ -61,10 +56,16 @@ const DefaultHeader = () => {
         </form>
         <div className={styles.spacing} />
         <div>
-          {isAuthenticated ? (
+          {user ? (
             <>
-              <img src={userInfo.icon} className={styles.userIcon} />
-              <span>{userInfo.name}</span>
+              <img
+                src={
+                  user.icon_path ??
+                  'https://icon-library.com/images/anonymous-user-icon/anonymous-user-icon-16.jpg'
+                }
+                className={styles.userIcon}
+              />
+              <span>{'TODO: Add name column'}</span>
               <input type="file" accept="image/*" onChange={editIcon} />
               <button onClick={logout}>LOGOUT</button>
             </>

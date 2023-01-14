@@ -1,11 +1,5 @@
 import { CognitoUserId } from '$/domains/ValueObjects/Auth/CognitoUserId'
 
-export type UserInfo = {
-  id: string
-  name: string
-  icon: string
-}
-
 export type AuthHeader = {
   authorization: string
 }
@@ -16,3 +10,6 @@ export interface ICognitoUserDTO {
 }
 
 export type ICognitoUser = ICognitoUserDTO & { id: CognitoUserId }
+
+import type { User } from '@prisma/client'
+export type { User }
