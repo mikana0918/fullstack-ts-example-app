@@ -2,6 +2,9 @@
   "name": "frourio-app",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
     "dev": "npm run migrate:dev && run-p dev:*",
     "dev:client": "next dev -p 8000",
