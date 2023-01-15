@@ -7,10 +7,8 @@ import {
   AWS_SECRET_ACCESS_KEY
 } from '$/env'
 
-// import * as Either from 'fp-ts/Either'
-
 const s3Client = new AWS.S3({
-  // credentials: new AWS.Credentials(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY),
+  credentials: new AWS.Credentials(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY),
   apiVersion: '2006-03-01',
   region: AWS_REGION,
   endpoint: AWS_S3_ENDPOINT,
