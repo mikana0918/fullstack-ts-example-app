@@ -1,6 +1,6 @@
 import AWS from 'aws-sdk'
 import { AWS_REGION, AWS_S3_ENDPOINT, AWS_S3_BUCKET_USER_UPLOADS } from '$/env'
-import * as Either from 'fp-ts/Either'
+// import * as Either from 'fp-ts/Either'
 
 const s3Client = new AWS.S3({
   apiVersion: '2006-03-01',
@@ -8,6 +8,8 @@ const s3Client = new AWS.S3({
   endpoint: AWS_S3_ENDPOINT,
   s3ForcePathStyle: true
 })
+
+console.log(`s3Client`, s3Client)
 
 export const s3Service = {
   listBuckets: () => {
@@ -35,6 +37,9 @@ export const s3Service = {
 
         // return Either.left(err)
       }
+
+      // FIXME: remove this
+      console.log(data)
 
       // if (data) {
       //   return Either.right(data)

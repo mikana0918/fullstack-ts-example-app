@@ -8,6 +8,8 @@ export type AdditionalRequest = {
 
 export default defineController(() => ({
   post: async ({ user, body }) => {
+    // FIXME: remove this
+    console.log(`users/controller.ts [user, body]`, user, body)
     const createOrFetchedUser = await createUserIfNotExists({
       cognitoUserId: user.id
     })

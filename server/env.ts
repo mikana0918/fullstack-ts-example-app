@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
+const NODE_ENV = process.env.NODE_ENV
 const API_JWT_SECRET = process.env.API_JWT_SECRET ?? ''
 const API_USER_ID = process.env.API_USER_ID ?? ''
 const API_USER_PASS = process.env.API_USER_PASS ?? ''
@@ -24,5 +25,6 @@ export {
   API_UPLOAD_DIR,
   AWS_S3_BUCKET_USER_UPLOADS,
   AWS_REGION,
-  AWS_S3_ENDPOINT
+  AWS_S3_ENDPOINT,
+  NODE_ENV
 }

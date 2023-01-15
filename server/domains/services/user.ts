@@ -14,6 +14,8 @@ export const uploadUserIcon = async ({
   iconFile: MultipartFile
   user: User
 }) => {
+  // FIXME: remove
+  console.log(`uploadUserIcon [iconFile, user]`, iconFile, user)
   const userUploadIconKey = storagePaths.userUploadedIcon({
     fileName: iconFile.filename,
     cognitoUserId: new CognitoUserId(user.cognito_id)
@@ -39,6 +41,8 @@ export const uploadUserIcon = async ({
     })
     .promise()
     .then(async (_) => {
+      // FIXME: remove this
+      console.log(_)
       await onSuccessCallback()
     })
     .catch((err) => {
