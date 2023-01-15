@@ -19,7 +19,12 @@ module.exports = {
         API_ORIGIN: process.env.API_ORIGIN,
         API_BASE_PATH: process.env.API_BASE_PATH,
         API_SERVER_PORT: process.env.API_SERVER_PORT,
-        API_UPLOAD_DIR: process.env.API_UPLOAD_DIR
+        API_UPLOAD_DIR: process.env.API_UPLOAD_DIR,
+        AWS_REGION: process.env.AWS_REGION,
+        AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
+        AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
+        AWS_S3_ENDPOINT: process.env.AWS_S3_ENDPOINT,
+        AWS_S3_BUCKET_USER_UPLOADS: process.env.AWS_S3_BUCKET_USER_UPLOADS
       }
     }
   ],
@@ -50,7 +55,12 @@ module.exports = {
         API_ORIGIN: process.env.API_ORIGIN,
         API_BASE_PATH: process.env.API_BASE_PATH,
         API_SERVER_PORT: process.env.API_SERVER_PORT,
-        API_UPLOAD_DIR: process.env.API_UPLOAD_DIR
+        API_UPLOAD_DIR: process.env.API_UPLOAD_DIR,
+        AWS_REGION: process.env.AWS_REGION,
+        AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
+        AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
+        AWS_S3_ENDPOINT: process.env.AWS_S3_ENDPOINT,
+        AWS_S3_BUCKET_USER_UPLOADS: process.env.AWS_S3_BUCKET_USER_UPLOADS
       }
     }
   }
