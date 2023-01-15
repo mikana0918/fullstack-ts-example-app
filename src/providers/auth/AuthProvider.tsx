@@ -27,9 +27,7 @@ interface Props {
  * AuthProvider provides user auth global states
  */
 export const AuthProvider = ({ children, user }: Props) => {
-  const { data: authUser, error } = useAspidaSWR(
-    apiClient.users._userId(user?.getUsername() ?? 'USER_NOT_SET')
-  )
+  const { data: authUser, error } = useAspidaSWR(apiClient.users.me)
 
   const value = {
     isAuthenticated: Boolean(user) && Boolean(authUser) && !error,
