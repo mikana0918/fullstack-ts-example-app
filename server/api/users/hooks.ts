@@ -1,4 +1,4 @@
-import { defineHooks } from './$relay'
+import { defineHooks } from './me/$relay'
 import { checkAuth } from '$/middleware/auth'
 
 export default defineHooks(() => ({
