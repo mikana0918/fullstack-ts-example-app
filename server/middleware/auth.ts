@@ -23,10 +23,12 @@ export const checkAuth = async (
   if (Either.isRight(verifyEither)) {
     const { cognitoUser } = verifyEither.right
 
-    // populate auth user
-    req.user = {
+    const user = {
       ...cognitoUser,
       id: new CognitoUserId(cognitoUser.Username)
     }
+
+    // populate auth user
+    req.user = user
   }
 }

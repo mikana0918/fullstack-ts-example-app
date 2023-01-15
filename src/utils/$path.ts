@@ -15,7 +15,7 @@ export type PagesPath = typeof pagesPath
 
 export const staticPath = {
   favicon_png: '/fullstack-ts-example-app/favicon.png',
-  vercel_svg: '/fullstack-ts-example-app/vercel.svg',
+  vercel_svg: '/fullstack-ts-example-app/vercel.svg'
 } as const
 
 export type StaticPath = typeof staticPath

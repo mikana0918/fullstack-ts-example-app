@@ -19,7 +19,7 @@ export const getUserFromAuthHeader = async ({
   try {
     const accessToken = headers.authorization.split(' ')[1]
 
-    const { data: cognitoUser } = await axios.post<ICognitoUserDTO>(
+    const { data } = await axios.post<ICognitoUserDTO>(
       COGNITO_URL,
       {
         AccessToken: accessToken
@@ -34,7 +34,7 @@ export const getUserFromAuthHeader = async ({
 
     return Either.right({
       accessToken,
-      cognitoUser
+      cognitoUser: data
     })
   } catch (error) {
     if (error instanceof Error) {
