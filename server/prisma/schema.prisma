@@ -18,3 +18,9 @@ model Article {
   title String
   body  String
 }
+
+model User {
+  id         Int     @id @default(autoincrement())
+  cognito_id String  @unique
+  icon_path  String?
+}

@@ -1,20 +1,16 @@
 import axios from 'axios'
 import * as Either from 'fp-ts/Either'
 import type { Either as IEither } from 'fp-ts/Either'
+import type { ICognitoUserDTO } from '$/types'
 
 const COGNITO_URL = `https://cognito-idp.ap-northeast-1.amazonaws.com/`
-
-interface ICognitoUser {
-  UserAttributes: { Name: string; value: string }[]
-  Username: string
-}
 
 export const getUserFromAuthHeader = async ({
   headers
 }: {
   headers: { authorization: string | null }
 }): Promise<
-  IEither<Error, { accessToken: string; cognitoUser: ICognitoUser }>
+  IEither<Error, { accessToken: string; cognitoUser: ICognitoUserDTO }>
 > => {
   if (headers.authorization === null) {
     throw new Error('authorization header should not be null.')
@@ -23,7 +19,7 @@ export const getUserFromAuthHeader = async ({
   try {
     const accessToken = headers.authorization.split(' ')[1]
 
-    const { data: cognitoUser } = await axios.post<ICognitoUser>(
+    const { data } = await axios.post<ICognitoUserDTO>(
       COGNITO_URL,
       {
         AccessToken: accessToken
@@ -38,7 +34,7 @@ export const getUserFromAuthHeader = async ({
 
     return Either.right({
       accessToken,
-      cognitoUser
+      cognitoUser: data
     })
   } catch (error) {
     if (error instanceof Error) {

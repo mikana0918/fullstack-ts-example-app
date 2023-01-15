@@ -1,13 +1,16 @@
+import { ReactNode, createContext } from 'react'
+import type { User } from '$/types'
+import useAspidaSWR from '@aspida/swr'
+import { apiClient } from '~/utils/apiClient'
 import { AmplifyUser } from '@aws-amplify/ui'
-import { ReactNode, createContext, useMemo } from 'react'
 
 interface IAuthContext {
-  user: AmplifyUser | undefined
+  user: User | null | undefined
   isAuthenticated: boolean
 }
 
 const initialContextState: IAuthContext = {
-  user: undefined,
+  user: null,
   isAuthenticated: false
 }
 
@@ -22,12 +25,14 @@ interface Props {
  * AuthProvider provides user auth global states
  */
 export const AuthProvider = ({ children, user }: Props) => {
-  const value = useMemo(() => {
-    return {
-      user,
-      isAuthenticated: user !== undefined
-    }
-  }, [user])
+  const { data: authUser, error } = useAspidaSWR(
+    apiClient.users._userId(user?.getUsername() ?? 'USER_NOT_SET')
+  )
+
+  const value = {
+    isAuthenticated: Boolean(user) && Boolean(authUser) && !error,
+    user: authUser
+  }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

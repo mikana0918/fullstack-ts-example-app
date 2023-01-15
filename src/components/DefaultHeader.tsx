@@ -1,28 +1,38 @@
-import { useState } from 'react'
+import { useState, ChangeEvent, useMemo } from 'react'
 import styles from './DefaultHeader.module.css'
-import type { UserInfo } from '$/types'
 import Link from 'next/link'
 import { pagesPath } from '~/utils/$path'
 import { useRouter } from 'next/router'
 import { AmplifyAuthModule } from '~/app/services/auth'
 import { useAuth } from '~/hooks/useAuth'
+import { apiClient } from '~/utils/apiClient'
+
+// FIXME: remove this
+console.log('My Application Version', process.env)
 
 const DefaultHeader = () => {
   const router = useRouter()
   const [search, setSearch] = useState('')
+  const { user } = useAuth()
 
-  // TODO: inject user instance from useAuth()
-  const [userInfo, setUserInfo] = useState({} as UserInfo)
-
-  const { isAuthenticated } = useAuth()
-
-  const editIcon = () => {
-    console.log('edit icon')
+  const editIcon = async (evt: ChangeEvent<HTMLInputElement>) => {
+    if (evt.target.files) {
+      await apiClient.users.post({ body: { file: evt.target.files[0] } })
+    }
   }
 
   const logout = async () => {
     await AmplifyAuthModule.signOut()
   }
+
+  const userIconPath = useMemo(() => {
+    const DEFAULT_USER_ICON_PATH =
+      'https://icon-library.com/images/anonymous-user-icon/anonymous-user-icon-16.jpg'
+
+    return user?.icon_path
+      ? `${process.env.NEXT_PUBLIC_ASSET_ORIGIN_URL}/${user.icon_path}`
+      : DEFAULT_USER_ICON_PATH
+  }, [user])
 
   return (
     <div>
@@ -58,10 +68,10 @@ const DefaultHeader = () => {
         </form>
         <div className={styles.spacing} />
         <div>
-          {isAuthenticated ? (
+          {user ? (
             <>
-              <img src={userInfo.icon} className={styles.userIcon} />
-              <span>{userInfo.name}</span>
+              <img src={userIconPath} className={styles.userIcon} />
+              <span>{'TODO: Add name column'}</span>
               <input type="file" accept="image/*" onChange={editIcon} />
               <button onClick={logout}>LOGOUT</button>
             </>
