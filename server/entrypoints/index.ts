@@ -8,3 +8,6 @@ init()
     // See also https://pm2.keymetrics.io/docs/usage/signals-clean-restart/
     process.send?.('ready')
   })
+
+// FIXME: remove
+console.log(process.env)

@@ -6,9 +6,11 @@ const s3Client = new AWS.S3({
   apiVersion: '2006-03-01',
   region: AWS_REGION,
   endpoint: AWS_S3_ENDPOINT,
-  s3ForcePathStyle: true
+  s3ForcePathStyle: true,
+  logger: console // FIXME: remove
 })
 
+// FIXME: remove
 console.log(`s3Client`, s3Client)
 
 export const s3Service = {
@@ -29,6 +31,12 @@ export const s3Service = {
       Key: storageKey,
       Body: file
     }
+
+    // FIXME: remove
+    console.log(`upload.args`, file, storageKey)
+
+    // FIXME: remove
+    console.log(`upload.request`, request)
 
     // TODO: those Either are not returned. AWS returns ManagedUpload
     return s3Client.upload(request, (err, data) => {
