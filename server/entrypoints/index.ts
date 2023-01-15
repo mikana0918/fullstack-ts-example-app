@@ -1,4 +1,4 @@
-import { init } from '$/app/services/app'
+import { init } from '$/app/services/container/app'
 import { API_SERVER_PORT } from '$/env'
 
 init()
