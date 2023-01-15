@@ -17,6 +17,8 @@ const API_BASE_PATH = read(process.env.API_BASE_PATH)
 const API_ORIGIN = read(process.env.API_ORIGIN)
 const API_UPLOAD_DIR = read(process.env.API_UPLOAD_DIR)
 
+const AWS_ACCESS_KEY_ID = read(process.env.AWS_ACCESS_KEY_ID)
+const AWS_SECRET_ACCESS_KEY = read(process.env.AWS_SECRET_ACCESS_KEY)
 const AWS_REGION = read(process.env.AWS_REGION)
 const AWS_S3_ENDPOINT = read(process.env.AWS_S3_ENDPOINT)
 const AWS_S3_BUCKET_USER_UPLOADS = read(process.env.AWS_S3_BUCKET_USER_UPLOADS)
@@ -32,5 +34,7 @@ export {
   AWS_S3_BUCKET_USER_UPLOADS,
   AWS_REGION,
   AWS_S3_ENDPOINT,
-  NODE_ENV
+  NODE_ENV,
+  AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY
 }

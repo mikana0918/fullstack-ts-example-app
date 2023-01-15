@@ -1,5 +1,11 @@
 import AWS from 'aws-sdk'
-import { AWS_REGION, AWS_S3_ENDPOINT, AWS_S3_BUCKET_USER_UPLOADS } from '$/env'
+import {
+  AWS_REGION,
+  AWS_S3_ENDPOINT,
+  AWS_S3_BUCKET_USER_UPLOADS,
+  AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY
+} from '$/env'
 
 console.log(`AWS_REGION: ${AWS_REGION}`)
 console.log(`AWS_S3_ENDPOINT: ${AWS_S3_ENDPOINT}`)
@@ -7,6 +13,7 @@ console.log(`AWS_S3_BUCKET_USER_UPLOADS: ${AWS_S3_BUCKET_USER_UPLOADS}`)
 // import * as Either from 'fp-ts/Either'
 
 const s3Client = new AWS.S3({
+  // credentials: new AWS.Credentials(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY),
   apiVersion: '2006-03-01',
   region: AWS_REGION,
   endpoint: AWS_S3_ENDPOINT,

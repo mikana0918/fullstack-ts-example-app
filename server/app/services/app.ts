@@ -6,15 +6,11 @@ import fastifyStatic from '@fastify/static'
 import fastifyJwt from '@fastify/jwt'
 import { API_JWT_SECRET, API_BASE_PATH, API_UPLOAD_DIR } from '$/env'
 import server from '$/$server'
-import { registerProviderAWS } from "infra/providers/aws"
-
-const registerProviders = () => {
-  registerProviderAWS()
-}
+import { registerProviderAWS } from 'infra/providers/aws'
 
 export const init = (serverFactory?: FastifyServerFactory) => {
   const app = Fastify({ serverFactory })
-  registerProviders()
+  registerProviderAWS()
   app.register(helmet, { crossOriginResourcePolicy: false })
   app.register(cors)
   app.register(fastifyStatic, {
