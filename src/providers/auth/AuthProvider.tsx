@@ -6,11 +6,13 @@ import { AmplifyUser } from '@aws-amplify/ui'
 
 interface IAuthContext {
   user: User | null | undefined
+  cognitoUser: AmplifyUser | undefined
   isAuthenticated: boolean
 }
 
 const initialContextState: IAuthContext = {
   user: null,
+  cognitoUser: undefined,
   isAuthenticated: false
 }
 
@@ -31,7 +33,8 @@ export const AuthProvider = ({ children, user }: Props) => {
 
   const value = {
     isAuthenticated: Boolean(user) && Boolean(authUser) && !error,
-    user: authUser
+    user: authUser,
+    cognitoUser: user
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
