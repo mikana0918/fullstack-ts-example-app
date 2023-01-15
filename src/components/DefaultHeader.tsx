@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, useMemo } from 'react'
 import styles from './DefaultHeader.module.css'
 import Link from 'next/link'
 import { pagesPath } from '~/utils/$path'
@@ -6,6 +6,9 @@ import { useRouter } from 'next/router'
 import { AmplifyAuthModule } from '~/app/services/auth'
 import { useAuth } from '~/hooks/useAuth'
 import { apiClient } from '~/utils/apiClient'
+
+// FIXME: remove this
+console.log('My Application Version', process.env)
 
 const DefaultHeader = () => {
   const router = useRouter()
@@ -21,6 +24,15 @@ const DefaultHeader = () => {
   const logout = async () => {
     await AmplifyAuthModule.signOut()
   }
+
+  const userIconPath = useMemo(() => {
+    const DEFAULT_USER_ICON_PATH =
+      'https://icon-library.com/images/anonymous-user-icon/anonymous-user-icon-16.jpg'
+
+    return user?.icon_path
+      ? `${process.env.NEXT_PUBLIC_ASSET_ORIGIN_URL}/${user.icon_path}`
+      : DEFAULT_USER_ICON_PATH
+  }, [user])
 
   return (
     <div>
@@ -58,13 +70,7 @@ const DefaultHeader = () => {
         <div>
           {user ? (
             <>
-              <img
-                src={
-                  user.icon_path ??
-                  'https://icon-library.com/images/anonymous-user-icon/anonymous-user-icon-16.jpg'
-                }
-                className={styles.userIcon}
-              />
+              <img src={userIconPath} className={styles.userIcon} />
               <span>{'TODO: Add name column'}</span>
               <input type="file" accept="image/*" onChange={editIcon} />
               <button onClick={logout}>LOGOUT</button>
