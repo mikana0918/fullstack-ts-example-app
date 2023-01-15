@@ -33,12 +33,12 @@ export const s3Service = {
       if (err) {
         console.error('Failed to upload given [file, err]', file, err)
 
-        return Either.left(err)
+        // return Either.left(err)
       }
 
-      if (data) {
-        return Either.right(data)
-      }
+      // if (data) {
+      //   return Either.right(data)
+      // }
     })
   }
 }
