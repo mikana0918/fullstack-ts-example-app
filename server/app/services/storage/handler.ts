@@ -1,5 +1,9 @@
 import AWS from 'aws-sdk'
 import { AWS_REGION, AWS_S3_ENDPOINT, AWS_S3_BUCKET_USER_UPLOADS } from '$/env'
+
+console.log(`AWS_REGION: ${AWS_REGION}`)
+console.log(`AWS_S3_ENDPOINT: ${AWS_S3_ENDPOINT}`)
+console.log(`AWS_S3_BUCKET_USER_UPLOADS: ${AWS_S3_BUCKET_USER_UPLOADS}`)
 // import * as Either from 'fp-ts/Either'
 
 const s3Client = new AWS.S3({
