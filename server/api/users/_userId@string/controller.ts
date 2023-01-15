@@ -4,9 +4,13 @@ import { CognitoUserId } from '$/domains/ValueObjects/Auth/CognitoUserId'
 
 export default defineController(() => ({
   get: async ({ params }) => {
+    console.log(`params`, params)
     const cognitoUserId = new CognitoUserId(params.userId)
+    console.log(`cognitoUserId`, cognitoUserId)
 
     const user = await getUserByCognitoUserId({ cognitoUserId })
+
+    console.log(`user`, user)
 
     if (user === null) {
       return {
