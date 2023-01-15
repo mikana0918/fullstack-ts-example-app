@@ -13,7 +13,7 @@ console.log('My Application Version', process.env)
 const DefaultHeader = () => {
   const router = useRouter()
   const [search, setSearch] = useState('')
-  const { user } = useAuth()
+  const { user, cognitoUser } = useAuth()
 
   const editIcon = async (evt: ChangeEvent<HTMLInputElement>) => {
     if (evt.target.files) {
@@ -68,7 +68,7 @@ const DefaultHeader = () => {
         </form>
         <div className={styles.spacing} />
         <div>
-          {user ? (
+          {cognitoUser ? (
             <>
               <img src={userIconPath} className={styles.userIcon} />
               <span>{'TODO: Add name column'}</span>
