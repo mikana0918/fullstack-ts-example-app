@@ -10,9 +10,10 @@ import { registerProviderAWS } from 'infra/providers/aws'
 
 export const init = (serverFactory?: FastifyServerFactory) => {
   const app = Fastify({
-    serverFactory,
-    maxParamLength: 1000 // This defaults to 100: returns 404 error params surpass this length
+    maxParamLength: 1000, // This defaults to 100: returns 404 error params surpass this length
+    ...serverFactory
   })
+  console.log(app)
   registerProviderAWS()
   app.register(helmet, { crossOriginResourcePolicy: false })
   app.register(cors)
