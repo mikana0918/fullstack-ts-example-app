@@ -7,9 +7,6 @@ import {
   AWS_SECRET_ACCESS_KEY
 } from '$/env'
 
-console.log(`AWS_REGION: ${AWS_REGION}`)
-console.log(`AWS_S3_ENDPOINT: ${AWS_S3_ENDPOINT}`)
-console.log(`AWS_S3_BUCKET_USER_UPLOADS: ${AWS_S3_BUCKET_USER_UPLOADS}`)
 // import * as Either from 'fp-ts/Either'
 
 const s3Client = new AWS.S3({
@@ -37,6 +34,11 @@ export const s3Service = {
     })
   },
   upload: ({ file, storageKey }: { file: AWS.S3.Body; storageKey: string }) => {
+    console.log(process.env)
+    console.log(`AWS_REGION: ${AWS_REGION}`)
+    console.log(`AWS_S3_ENDPOINT: ${AWS_S3_ENDPOINT}`)
+    console.log(`AWS_S3_BUCKET_USER_UPLOADS: ${AWS_S3_BUCKET_USER_UPLOADS}`)
+
     const request: AWS.S3.PutObjectRequest = {
       Bucket: AWS_S3_BUCKET_USER_UPLOADS,
       Key: storageKey,
