@@ -4,6 +4,7 @@ import { storagePaths } from '$/app/services/storage/paths'
 import { CognitoUserId } from '$/domains/ValueObjects/Auth/CognitoUserId'
 import { PrismaClient } from '@prisma/client'
 import type { User } from '@prisma/client'
+import { AWS_S3_BUCKET_USER_UPLOADS } from '$/env'
 
 const prisma = new PrismaClient()
 
@@ -27,7 +28,7 @@ export const uploadUserIcon = async ({
         cognito_id: user.cognito_id
       },
       data: {
-        icon_path: userUploadIconKey
+        icon_path: `${AWS_S3_BUCKET_USER_UPLOADS}/${userUploadIconKey}`
       }
     })
   }
