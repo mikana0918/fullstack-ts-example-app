@@ -18,7 +18,6 @@ const Home: NextPage = () => {
 
   const createTask = useCallback(
     async (e: FormEvent) => {
-      console.log('createTask')
       e.preventDefault()
       if (!label) return
 
@@ -40,7 +39,6 @@ const Home: NextPage = () => {
   }, [])
 
   if (error) return <div>failed to load</div>
-  // if (!tasks) return <div>loading...</div>
 
   return (
     <Layout>

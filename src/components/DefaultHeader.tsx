@@ -7,9 +7,6 @@ import { AmplifyAuthModule } from '~/app/services/auth'
 import { useAuth } from '~/hooks/useAuth'
 import { apiClient } from '~/utils/apiClient'
 
-// FIXME: remove this
-console.log('My Application Version', process.env)
-
 const DefaultHeader = () => {
   const router = useRouter()
   const [search, setSearch] = useState('')

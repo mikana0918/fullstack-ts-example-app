@@ -13,7 +13,6 @@ export const init = (serverFactory?: FastifyServerFactory) => {
     maxParamLength: 1000, // This defaults to 100: returns 404 error params surpass this length
     ...serverFactory
   })
-  console.log(app)
   registerProviderAWS()
   app.register(helmet, { crossOriginResourcePolicy: false })
   app.register(cors)
