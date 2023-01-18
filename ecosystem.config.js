@@ -10,6 +10,7 @@ module.exports = {
       env: {
         NODE_ENV: 'development'
       },
+      node_args: ['--max_old_space_size=512'],
       env_production: {
         NODE_ENV: 'production',
         API_DATABASE_URL: process.env.API_DATABASE_URL,
@@ -43,7 +44,7 @@ module.exports = {
         'npm install --prefix server --production=false',
         'npm run build:server',
         'npm run migrate:deploy',
-        'npx pm2 startOrRestart ecosystem.config.js --env production --node-args="--max-old-space-size=512"'
+        'npx pm2 startOrRestart ecosystem.config.js --env production'
       ].join(' && '),
       'pre-setup': '',
       env: {
