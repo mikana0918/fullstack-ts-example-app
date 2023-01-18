@@ -43,7 +43,7 @@ module.exports = {
         'npm install --prefix server --production=false',
         'npm run build:server',
         'npm run migrate:deploy',
-        'npx pm2 startOrRestart ecosystem.config.js --env production'
+        'npx pm2 startOrRestart ecosystem.config.js --env production --node-args="--max-old-space-size=512"'
       ].join(' && '),
       'pre-setup': '',
       env: {
