@@ -7,14 +7,18 @@ import { AmplifyAuthModule } from '~/app/services/auth'
 import { useAuth } from '~/hooks/useAuth'
 import { apiClient } from '~/utils/apiClient'
 
+const DEFAULT_USER_ICON_PATH =
+  'https://icon-library.com/images/anonymous-user-icon/anonymous-user-icon-16.jpg'
+
 const DefaultHeader = () => {
   const router = useRouter()
   const [search, setSearch] = useState('')
-  const { user, cognitoUser } = useAuth()
+  const { user, cognitoUser, mutate: mutateAuthUser } = useAuth()
 
   const editIcon = async (evt: ChangeEvent<HTMLInputElement>) => {
     if (evt.target.files) {
       await apiClient.users.post({ body: { file: evt.target.files[0] } })
+      mutateAuthUser()
     }
   }
 
@@ -23,9 +27,6 @@ const DefaultHeader = () => {
   }
 
   const userIconPath = useMemo(() => {
-    const DEFAULT_USER_ICON_PATH =
-      'https://icon-library.com/images/anonymous-user-icon/anonymous-user-icon-16.jpg'
-
     return user?.icon_path
       ? `${process.env.NEXT_PUBLIC_ASSET_ORIGIN_URL}/${user.icon_path}`
       : DEFAULT_USER_ICON_PATH
