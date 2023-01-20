@@ -16,7 +16,7 @@ const Article: NextPage = () => {
     apiClient.article._articleId(Number.parseInt(router.query.id as string, 10))
   )
   return (
-    <Layout>
+    <Layout title="Details">
       <Head>
         <title>{article?.title ?? 'Loading...'}</title>
       </Head>

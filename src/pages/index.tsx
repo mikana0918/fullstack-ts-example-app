@@ -41,11 +41,7 @@ const Home: NextPage = () => {
   if (error) return <div>failed to load</div>
 
   return (
-    <Layout>
-      <Head>
-        <title>frourio-todo-app</title>
-      </Head>
-
+    <Layout title="HOME">
       <h1 className={styles.title}>
         Welcome to <a href="https://nextjs.org">Next.js!</a>
       </h1>
