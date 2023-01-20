@@ -1,4 +1,4 @@
-import React from 'react'
+import { useMemo } from 'react'
 import {
   Box,
   CloseButton,
@@ -10,12 +10,20 @@ import {
   DrawerContent,
   useDisclosure,
   BoxProps,
-  FlexProps
+  FlexProps,
+  HStack,
+  Avatar,
+  Text
 } from '@chakra-ui/react'
 import { FiHome, FiBook, FiSettings } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import NextLink from 'next/link'
 import { pagesPath } from '~/utils/$path'
+import { useAuth } from '~/hooks/useAuth'
+import { AmplifyUser } from '@aws-amplify/ui'
+
+const DEFAULT_USER_ICON_PATH =
+  'https://icon-library.com/images/anonymous-user-icon/anonymous-user-icon-16.jpg'
 
 interface LinkItemProps {
   name: string
@@ -42,12 +50,21 @@ const LinkItems: Array<LinkItemProps> = [
 
 export default function SimpleSidebar() {
   const { isOpen, onClose } = useDisclosure()
+  const { user, cognitoUser } = useAuth()
+
+  const userIconPath = useMemo(() => {
+    return user?.icon_path
+      ? `${process.env.NEXT_PUBLIC_ASSET_ORIGIN_URL}/${user.icon_path}`
+      : DEFAULT_USER_ICON_PATH
+  }, [user])
 
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent
         onClose={() => onClose}
         display={{ base: 'none', md: 'block' }}
+        userIconPath={userIconPath}
+        cognitoUser={cognitoUser}
       />
       <Drawer
         autoFocus={false}
@@ -59,7 +76,11 @@ export default function SimpleSidebar() {
         size="full"
       >
         <DrawerContent>
-          <SidebarContent onClose={onClose} />
+          <SidebarContent
+            onClose={onClose}
+            userIconPath={userIconPath}
+            cognitoUser={cognitoUser}
+          />
         </DrawerContent>
       </Drawer>
     </Box>
@@ -68,9 +89,16 @@ export default function SimpleSidebar() {
 
 interface SidebarProps extends BoxProps {
   onClose: () => void
+  userIconPath: string
+  cognitoUser?: AmplifyUser
 }
 
-const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+const SidebarContent = ({
+  onClose,
+  userIconPath,
+  cognitoUser,
+  ...rest
+}: SidebarProps) => {
   return (
     <Box
       bg={useColorModeValue('white', 'gray.900')}
@@ -89,6 +117,18 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           {link.name}
         </NavItem>
       ))}
+      <Box position={'fixed'} bottom={0} padding={'3'}>
+        <HStack>
+          {cognitoUser ? (
+            <Box>
+              <HStack>
+                <Avatar src={userIconPath} />
+                <Text fontSize={'sm'}>{'TODO: NAME'}</Text>
+              </HStack>
+            </Box>
+          ) : null}
+        </HStack>
+      </Box>
     </Box>
   )
 }
