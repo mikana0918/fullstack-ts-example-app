@@ -1,32 +1,24 @@
 import React, { FC, ReactNode } from 'react'
 import styles from '~/styles/Layout.module.scss'
-import { staticPath } from '~/utils/$path'
-import DefaultHeader from '../components/DefaultHeader'
-
+import DefaultHeader from '~/components/layouts/DefaultHeader'
+import { Box, Flex, VStack } from '@chakra-ui/react'
+import DefaultSidebar from '~/components/layouts/DefaultSidebar'
 type LayoutProps = {
   children: ReactNode
 }
 
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
-    <div className={styles.container}>
+    <Flex w="100vw">
+      <DefaultSidebar />
       <DefaultHeader />
-      <main className={styles.main}>{children}</main>
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img
-            src={staticPath.vercel_svg}
-            alt="Vercel Logo"
-            className={styles.logo}
-          />
-        </a>
-      </footer>
-    </div>
+      <main className={styles.main}>
+        <Flex>
+          <Box w="30%"></Box>
+          <Box w="70%">{children}</Box>
+        </Flex>
+      </main>
+    </Flex>
   )
 }
 
