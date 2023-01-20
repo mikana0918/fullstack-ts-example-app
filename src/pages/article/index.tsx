@@ -3,7 +3,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import Layout from '~/components/Layout'
+import Layout from '~/layouts/DefaultLayout'
 import { pagesPath } from '~/utils/$path'
 import { apiClient } from '~/utils/apiClient'
 

@@ -5,7 +5,7 @@ import styles from '~/styles/Home.module.scss'
 import { apiClient } from '~/utils/apiClient'
 import type { Task } from '@prisma/client'
 import type { FormEvent, ChangeEvent } from 'react'
-import Layout from '~/components/Layout'
+import Layout from '~/layouts/DefaultLayout'
 import type { NextPage } from 'next'
 
 const Home: NextPage = () => {

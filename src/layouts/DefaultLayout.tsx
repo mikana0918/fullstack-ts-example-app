@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react'
 import styles from '~/styles/Layout.module.scss'
 import { staticPath } from '~/utils/$path'
-import DefaultHeader from './DefaultHeader'
+import DefaultHeader from '../components/DefaultHeader'
 
 type LayoutProps = {
   children: ReactNode
