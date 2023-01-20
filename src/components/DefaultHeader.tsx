@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, useMemo } from 'react'
-import styles from './DefaultHeader.module.css'
+import styles from './DefaultHeader.module.scss'
 import Link from 'next/link'
 import { pagesPath } from '~/utils/$path'
 import { useRouter } from 'next/router'

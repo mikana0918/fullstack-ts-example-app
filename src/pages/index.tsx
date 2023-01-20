@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useCallback, useState } from 'react'
 import useAspidaSWR from '@aspida/swr'
-import styles from '~/styles/Home.module.css'
+import styles from '~/styles/Home.module.scss'
 import { apiClient } from '~/utils/apiClient'
 import type { Task } from '@prisma/client'
 import type { FormEvent, ChangeEvent } from 'react'
