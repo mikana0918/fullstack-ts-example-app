@@ -52,6 +52,7 @@
     "@prisma/client": "^4.6.1",
     "aws-amplify": "^5.0.8",
     "axios": "^0.27.2",
+    "formik": "^2.2.9",
     "framer-motion": "^8.5.0",
     "next": "^13.0.4",
     "node-dev": "^7.4.3",
