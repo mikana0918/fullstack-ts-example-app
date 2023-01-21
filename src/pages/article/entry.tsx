@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { apiClient } from '~/utils/apiClient'
 import { useNextHeadMutation } from '~/store/useNextHeadMutation'
+import { Heading } from '@chakra-ui/react'
 
 export type Query = {
   id: number
@@ -20,7 +21,7 @@ const Article: NextPage = () => {
   return (
     <>
       <Head>
-        <title>{article?.title ?? 'Loading...'}</title>
+        <Heading fontSize={'4xl'}>{article?.title ?? '無題'}</Heading>
       </Head>
       {article ? (
         <>
