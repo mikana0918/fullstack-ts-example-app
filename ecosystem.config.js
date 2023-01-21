@@ -10,7 +10,7 @@ module.exports = {
       env: {
         NODE_ENV: 'development'
       },
-      node_args: ['--max_old_space_size=512'],
+      node_args: ['--max_old_space_size=1500'],
       env_production: {
         NODE_ENV: 'production',
         API_DATABASE_URL: process.env.API_DATABASE_URL,
