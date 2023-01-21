@@ -14,7 +14,11 @@
 - Hosting 
   - Github Pages
 - CI/CD
-  - Github Actions / Amplify CI
+  - Github Actions
+    - Testing
+    - Reviewdog to independently check lint
+    - Deploy both frontend & backend
+  - Amplify CI
 - Backend
   - TypeScript
   - Frourio
