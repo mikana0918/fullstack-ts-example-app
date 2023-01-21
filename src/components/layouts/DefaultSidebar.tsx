@@ -105,7 +105,6 @@ const SidebarContent = ({
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
       w={{ base: 'full', md: 60 }}
-      pos="fixed"
       h="full"
       {...rest}
     >

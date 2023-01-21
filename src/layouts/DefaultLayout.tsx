@@ -13,12 +13,11 @@ type LayoutProps = {
 const Layout: FC<LayoutProps> = ({ title, children }) => {
   return (
     <Flex w="100vw">
-      <DefaultSidebar />
       <DefaultHeader />
+      <DefaultSidebar />
       <main className={styles.main}>
         <PageHead title={`${title} | fullstack-ts-example-app`} />
         <Flex>
-          <Box w="30%"></Box>
           <Box w="70%">{children}</Box>
         </Flex>
       </main>
