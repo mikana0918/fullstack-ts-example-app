@@ -31,6 +31,7 @@ module.exports = {
   ],
 
   deploy: {
+    node_args: ['--max_old_space_size=2048'],
     production: {
       user: process.env.API_DEPLOY_USER,
       host: process.env.API_DEPLOY_HOST,
