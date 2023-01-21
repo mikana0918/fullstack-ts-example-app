@@ -10,7 +10,7 @@ module.exports = {
       env: {
         NODE_ENV: 'development'
       },
-      node_args: ['--max_old_space_size=512'],
+      // node_args: ['--max_old_space_size=2048'],
       env_production: {
         NODE_ENV: 'production',
         API_DATABASE_URL: process.env.API_DATABASE_URL,
@@ -31,6 +31,7 @@ module.exports = {
   ],
 
   deploy: {
+    // node_args: ['--max_old_space_size=2048'],
     production: {
       user: process.env.API_DEPLOY_USER,
       host: process.env.API_DEPLOY_HOST,
@@ -40,6 +41,7 @@ module.exports = {
       ssh_options: ['StrictHostKeyChecking=no'],
       'pre-deploy-local': '',
       'post-deploy': [
+        // 'export NODE_OPTIONS="--max-old-space-size=2048"',
         'npm install --production=false',
         'npm install --prefix server --production=false',
         'npm run build:server',

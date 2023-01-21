@@ -8,6 +8,9 @@ export const pagesPath = {
     },
     $url: (url?: { query?: OptionalQuery0, hash?: string }) => ({ pathname: '/article' as const, query: url?.query, hash: url?.hash })
   },
+  "settings": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/settings' as const, hash: url?.hash })
+  },
   $url: (url?: { hash?: string }) => ({ pathname: '/' as const, hash: url?.hash })
 }
 
