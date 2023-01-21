@@ -1,7 +1,6 @@
 import useAspidaSWR from '@aspida/swr'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import Head from 'next/head'
 import { apiClient } from '~/utils/apiClient'
 import { useNextHeadMutation } from '~/store/useNextHeadMutation'
 import { Heading } from '@chakra-ui/react'
@@ -20,12 +19,9 @@ const Article: NextPage = () => {
   )
   return (
     <>
-      <Head>
-        <Heading fontSize={'4xl'}>{article?.title ?? '無題'}</Heading>
-      </Head>
       {article ? (
         <>
-          <h1>{article.title}</h1>
+          <Heading fontSize={'4xl'}>{article?.title ?? '無題'}</Heading>
           <pre>{article.body}</pre>
         </>
       ) : (
