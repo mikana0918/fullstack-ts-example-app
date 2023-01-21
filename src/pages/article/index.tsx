@@ -2,27 +2,29 @@ import useAspidaSWR from '@aspida/swr'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import Layout from '~/layouts/DefaultLayout'
 import { pagesPath } from '~/utils/$path'
 import { apiClient } from '~/utils/apiClient'
 import { Box, Button, FormControl, HStack, Input, Text } from '@chakra-ui/react'
 import { useState } from 'react'
+import { useNextHeadMutation } from '~/store/useNextHeadMutation'
 
 export type OptionalQuery = {
   search: string
 }
 
 const ArticleList: NextPage = () => {
+  useNextHeadMutation('記事一覧')
+
   const router = useRouter()
+  const [, setSearchWord] = useState('')
   const query = router.query as Partial<OptionalQuery>
   const search = query.search ? query.search.trim() : ''
   const { data: articleList } = useAspidaSWR(apiClient.article, {
     query: { search }
   })
-  const [, setSearchWord] = useState('')
 
   return (
-    <Layout title={'記事一覧'}>
+    <>
       <Text fontSize="4xl">Articles</Text>
       <HStack>
         <Box>
@@ -42,7 +44,7 @@ const ArticleList: NextPage = () => {
               <Input
                 type="text"
                 name="query"
-                onInput={(e) =>
+                onChange={(e) =>
                   e.target instanceof HTMLInputElement &&
                   setSearchWord(e.target.value)
                 }
@@ -84,7 +86,7 @@ const ArticleList: NextPage = () => {
       ) : (
         <span>Loading...</span>
       )}
-    </Layout>
+    </>
   )
 }
 

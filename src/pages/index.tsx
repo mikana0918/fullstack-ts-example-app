@@ -1,14 +1,15 @@
-import Head from 'next/head'
 import { useCallback, useState } from 'react'
 import useAspidaSWR from '@aspida/swr'
 import styles from '~/styles/Home.module.scss'
 import { apiClient } from '~/utils/apiClient'
 import type { Task } from '@prisma/client'
 import type { FormEvent, ChangeEvent } from 'react'
-import Layout from '~/layouts/DefaultLayout'
 import type { NextPage } from 'next'
+import { useNextHeadMutation } from '~/store/useNextHeadMutation'
 
 const Home: NextPage = () => {
+  useNextHeadMutation('トップ')
+
   const { data: tasks, error, mutate } = useAspidaSWR(apiClient.tasks)
   const [label, setLabel] = useState('')
   const inputLabel = useCallback(
@@ -41,13 +42,8 @@ const Home: NextPage = () => {
   if (error) return <div>failed to load</div>
 
   return (
-    <Layout title="HOME">
-      <h1 className={styles.title}>
-        Welcome to <a href="https://nextjs.org">Next.js!</a>
-      </h1>
-
+    <>
       <p className={styles.description}>frourio-todo-app</p>
-
       <div>
         <form style={{ textAlign: 'center' }} onSubmit={createTask}>
           <input value={label} type="text" onChange={inputLabel} />
@@ -76,7 +72,7 @@ const Home: NextPage = () => {
           </ul>
         )}
       </div>
-    </Layout>
+    </>
   )
 }
 

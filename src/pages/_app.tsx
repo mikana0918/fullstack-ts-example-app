@@ -9,6 +9,8 @@ import { Authenticator } from '@aws-amplify/ui-react'
 import { AuthProvider } from '~/providers/auth/AuthProvider'
 import { ChakraProvider } from '@chakra-ui/react'
 import { extendTheme } from '@chakra-ui/react'
+import Layout from '~/layouts/DefaultLayout'
+import { useNextHeadStore } from '~/store/useNextHeadMutation'
 
 Amplify.configure(awsExports)
 
@@ -23,6 +25,8 @@ const colors = {
 const theme = extendTheme({ colors })
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  const { title } = useNextHeadStore()
+
   return (
     <ChakraProvider theme={theme}>
       <Authenticator>
@@ -31,7 +35,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             <Head>
               <link rel="icon" href={staticPath.favicon_png} />
             </Head>
-            <Component {...pageProps} />
+            <Layout title={title}>
+              <Component {...pageProps} />
+            </Layout>
           </AuthProvider>
         )}
       </Authenticator>
