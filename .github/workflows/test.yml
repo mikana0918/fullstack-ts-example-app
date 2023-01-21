@@ -70,6 +70,7 @@ jobs:
           echo "API_DATABASE_URL=mysql://root:root@localhost:3306/test" > server/prisma/.env
       - run: npm run typecheck
       - run: |
+          export NODE_OPTIONS="--max_old_space_size=4096"
           npm run migrate:dev
           npm run test
         env:
