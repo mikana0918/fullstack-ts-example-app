@@ -1,5 +1,5 @@
 import { defineController } from './$relay'
-import { uploadUserIcon, createUserIfNotExists } from '$/domains/services/user'
+import * as DomainService from '$/domains/services/user'
 import type { ICognitoUser } from '$/types'
 
 export type AdditionalRequest = {
@@ -8,15 +8,22 @@ export type AdditionalRequest = {
 
 export default defineController(() => ({
   post: async ({ user, body }) => {
-    const createOrFetchedUser = await createUserIfNotExists({
+    const targetUser = await DomainService.createUserIfNotExists({
       cognitoUserId: user.id
     })
 
-    await uploadUserIcon({ iconFile: body.file, user: createOrFetchedUser })
+    if (body.file) {
+      await DomainService.uploadUserIcon({
+        iconFile: body.file,
+        user: targetUser
+      })
+    }
+
+    const updatedUser = await DomainService.updateUserInfo({ user: targetUser })
 
     return {
       status: 201,
-      body: createOrFetchedUser
+      body: updatedUser
     }
   }
 }))
