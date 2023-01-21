@@ -8,18 +8,21 @@ export type AdditionalRequest = {
 
 export default defineController(() => ({
   post: async ({ user, body }) => {
-    const targetUser = await DomainService.createUserIfNotExists({
+    const u = await DomainService.createUserIfNotExists({
       cognitoUserId: user.id
     })
 
     if (body.file) {
       await DomainService.uploadUserIcon({
         iconFile: body.file,
-        user: targetUser
+        user: u
       })
     }
 
-    const updatedUser = await DomainService.updateUserInfo({ user: targetUser })
+    const updatedUser = await DomainService.updateUserInfo({
+      cognito_id: user.id.toString(),
+      user_name: body.user_name
+    })
 
     return {
       status: 201,

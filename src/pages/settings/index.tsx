@@ -57,13 +57,15 @@ const Settings: NextPage = () => {
     return file
   }
 
-  const handleSubmit = (params: FormValue) => {
-    apiClient.users.post({
+  const handleSubmit = async (params: FormValue) => {
+    await apiClient.users.post({
       body: {
         file: params.file,
         user_name: params.username
       }
     })
+
+    await mutate()
   }
 
   const initialValues: FormValue = {
