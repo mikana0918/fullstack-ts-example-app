@@ -17,14 +17,27 @@
   - Github Actions / Amplify CI
 - Backend
   - TypeScript
-  - Frourio (Fastify, Prisma)
+  - Frourio
+  - Fastify
+  - Prisma
+  - Support lib
+    - fp-ts (barrow Monad impl)
+    - AWS SDK 
 - Frontend
   - TypeScript
   - Next.js
   - Frourio (Aspida, Pathpida)
+  - UI lib
+    - Chakra UI
+  - State management / Flux impl
+    - Zustand
+  - Forms & Validations
+    - Formik
+    - Zod (Zod adaptor)
 - etc
   - Google Domain for DNS settings (Route53 is not used)
   - PM2 for daemon monitoring / management
+  - Amplify CLI & Amplify file stubs
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
