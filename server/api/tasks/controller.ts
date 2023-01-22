@@ -1,5 +1,6 @@
 import { defineController } from './$relay'
 import { getTasks, createTask } from '$/domains/services/tasks'
+import { z } from 'zod'
 
 const print = (text: string) => console.log(text)
 
@@ -11,10 +12,15 @@ export default defineController(
 
       return { status: 200, body: await getTasks(query?.limit) }
     },
-    post: async ({ body }) => {
-      const newTask = await createTask(body.label)
+    post: {
+      validators: {
+        body: z.object({ label: z.string() })
+      },
+      handler: async ({ body }) => {
+        const newTask = await createTask(body.label)
 
-      return { status: 201, body: newTask }
+        return { status: 201, body: newTask }
+      }
     }
   })
 )
