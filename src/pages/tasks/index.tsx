@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import {
   Box,
   Heading,
@@ -32,9 +32,13 @@ const TaskManagementPage: NextPage = () => {
 
   const { data: tasks, error, mutate } = useAspidaSWR(apiClient.tasks)
 
+  const [isAddingTask, setIsAddingTask] = useState(false)
+
   const handleSubmit = async (params: FormValue) => {
+    setIsAddingTask(true)
     await apiClient.tasks.post({ body: { label: params.label } })
     await mutate()
+    setIsAddingTask(false)
 
     toast({
       title: 'Added new task ✅',
@@ -88,7 +92,12 @@ const TaskManagementPage: NextPage = () => {
                   </FormControl>
                 )}
               </Field>
-              <Button mt={4} colorScheme="teal" type="submit">
+              <Button
+                mt={4}
+                colorScheme="teal"
+                type="submit"
+                isLoading={isAddingTask}
+              >
                 Add
               </Button>
             </Form>
