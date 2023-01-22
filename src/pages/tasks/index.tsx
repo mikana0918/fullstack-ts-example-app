@@ -1,34 +1,33 @@
 import type { FormEvent, ChangeEvent } from 'react'
-import { Box, Heading } from '@chakra-ui/react'
-import { useCallback, useState } from 'react'
+import { Box, Heading, Button, FormControl, Input } from '@chakra-ui/react'
+import { useCallback } from 'react'
 import useAspidaSWR from '@aspida/swr'
 import styles from '~/styles/Home.module.scss'
 import { apiClient } from '~/utils/apiClient'
 import type { Task } from '@prisma/client'
 import { useNextHeadMutation } from '~/store/useNextHeadMutation'
 import type { NextPage } from 'next'
+import { Field, Form, Formik, FieldProps, FormikState } from 'formik'
+import { z } from 'zod'
+import { toFormikValidationSchema } from 'zod-formik-adapter'
+
+interface FormValue {
+  label: string
+}
+
+const formSchema = z.object({
+  label: z.string().max(191)
+})
 
 const TaskManagementPage: NextPage = () => {
   useNextHeadMutation('タスク')
 
   const { data: tasks, error, mutate } = useAspidaSWR(apiClient.tasks)
-  const [label, setLabel] = useState('')
-  const inputLabel = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => setLabel(e.target.value),
-    []
-  )
 
-  const createTask = useCallback(
-    async (e: FormEvent) => {
-      e.preventDefault()
-      if (!label) return
-
-      await apiClient.tasks.post({ body: { label } })
-      setLabel('')
-      mutate()
-    },
-    [label]
-  )
+  const handleSubmit = async (params: FormValue) => {
+    await apiClient.tasks.post({ body: { label: params.label } })
+    mutate()
+  }
 
   const toggleDone = useCallback(async (task: Task) => {
     await apiClient.tasks._taskId(task.id).patch({ body: { done: !task.done } })
@@ -40,16 +39,46 @@ const TaskManagementPage: NextPage = () => {
     mutate()
   }, [])
 
+  const initialValues = {
+    label: ''
+  }
+
   if (error) return <div>failed to load</div>
 
   return (
     <>
       <Heading>Todos</Heading>
       <Box>
-        <form style={{ textAlign: 'center' }} onSubmit={createTask}>
-          <input value={label} type="text" onChange={inputLabel} />
-          <input type="submit" value="ADD" />
-        </form>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={async (values, { resetForm }) => {
+            await handleSubmit(values)
+            resetForm()
+          }}
+          validationSchema={toFormikValidationSchema(formSchema)}
+        >
+          {({ values }) => (
+            <Form>
+              <Field name="label">
+                {({ field, form }: FieldProps<FormValue, FormValue>) => (
+                  <FormControl as="fieldset" isInvalid={!!form.errors.label}>
+                    <Input
+                      {...field}
+                      type="text"
+                      placeholder="TODO..."
+                      value={values.label}
+                      name="label"
+                      required
+                    />
+                  </FormControl>
+                )}
+              </Field>
+              <Button mt={4} colorScheme="teal" type="submit">
+                Add
+              </Button>
+            </Form>
+          )}
+        </Formik>
         {tasks && (
           <ul className={styles.tasks}>
             {tasks.map((task) => (
