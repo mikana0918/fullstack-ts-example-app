@@ -11,6 +11,9 @@ export const pagesPath = {
   "settings": {
     $url: (url?: { hash?: string }) => ({ pathname: '/settings' as const, hash: url?.hash })
   },
+  "tasks": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/tasks' as const, hash: url?.hash })
+  },
   $url: (url?: { hash?: string }) => ({ pathname: '/' as const, hash: url?.hash })
 }
 

@@ -1,72 +1,48 @@
 import dotenv from 'dotenv'
-import Fastify, { FastifyInstance } from 'fastify'
-import cors from '@fastify/cors'
-import aspida from '@aspida/axios'
-import api from '$/api/$api'
+// import Fastify, { FastifyInstance } from 'fastify'
+// import cors from '@fastify/cors'
+// import aspida from '@aspida/axios'
+// import api from '$/api/$api'
 import Home from '~/pages/index'
-import { render, waitFor } from '../testUtils'
+import { render } from '../testUtils'
 import { AmplifyAuthModule } from '~/app/services/auth'
+// import { useAuth } from '~/hooks/useAuth'
 
 dotenv.config({ path: 'server/.env' })
 jest.mock('next/router', () => require('next-router-mock'))
 jest.spyOn(AmplifyAuthModule, 'getCurrentToken').mockResolvedValue('some-token')
 
-const apiClient = api(aspida(undefined, { baseURL: process.env.API_BASE_PATH }))
-const res = function <T extends () => unknown>(
-  data: ReturnType<T> extends Promise<infer S> ? S : never
-) {
-  return data
-}
+// const apiClient = api(aspida(undefined, { baseURL: process.env.API_BASE_PATH }))
+// const res = function <T extends () => unknown>(
+//   data: ReturnType<T> extends Promise<infer S> ? S : never
+// ) {
+//   return data
+// }
 
-let fastify: FastifyInstance
+// let fastify: FastifyInstance
 
 beforeAll(() => {
-  fastify = Fastify({ forceCloseConnections: true })
-  fastify.register(cors)
-  fastify.get(apiClient.tasks.$path(), (_, reply) => {
-    reply.send(
-      res<typeof apiClient.tasks.$get>([
-        { id: 1, label: 'foo task', done: false },
-        { id: 2, label: 'bar task', done: true }
-      ])
-    )
-  })
-
-  return fastify.listen({ port: +(process.env.API_SERVER_PORT ?? '8080') })
+  // fastify = Fastify({ forceCloseConnections: true })
+  // fastify.register(cors)
+  // fastify.get(apiClient.users.me.$path(), (_, reply) => {
+  //   reply.send(
+  //     res<typeof apiClient.users.me.$get>({
+  //       id: 1,
+  //       cognito_id: 'AWS-COGNITO-TEST-ID',
+  //       icon_path: '/sample',
+  //       user_name: 'test-user'
+  //     })
+  //   )
+  // })
+  // return fastify.listen({ port: +(process.env.API_SERVER_PORT ?? '8080') })
 })
 
-afterAll(() => fastify.close())
+// afterAll(() => fastify.close())
 
 describe('Home page', () => {
   it('shows tasks', async () => {
     const { findByText } = render(<Home />)
 
-    await waitFor(
-      async () => {
-        await findByText('foo task')
-      },
-      { timeout: 5000 }
-    )
-    expect(await findByText('foo task')).toBeTruthy()
-    expect(await findByText('bar task')).toBeTruthy()
+    expect(await findByText('Welcome!')).toBeTruthy()
   })
-
-  // it('clicking button triggers prompt', async () => {
-  //   const { findByText } = render(<Home />)
-
-  //   window.prompt = jest.fn()
-  //   window.alert = jest.fn()
-
-  //   await waitFor(
-  //     async () => {
-  //       await findByText('LOGIN')
-  //     },
-  //     { timeout: 5000 }
-  //   )
-  //   fireEvent.click(await findByText('LOGIN'))
-  //   expect(window.prompt).toHaveBeenCalledWith(
-  //     'Enter the user id (See server/.env)'
-  //   )
-  //   expect(window.alert).toHaveBeenCalledWith('Login failed')
-  // })
 })

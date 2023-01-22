@@ -17,9 +17,9 @@ export default defineController(
         body: z.object({ label: z.string() })
       },
       handler: async ({ body }) => {
-        const b = await createTask(body.label)
+        const newTask = await createTask(body.label)
 
-        return { status: 201, body: b }
+        return { status: 201, body: newTask }
       }
     }
   })

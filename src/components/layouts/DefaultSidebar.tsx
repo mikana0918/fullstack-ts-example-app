@@ -15,12 +15,13 @@ import {
   Avatar,
   Text
 } from '@chakra-ui/react'
-import { FiHome, FiBook, FiSettings } from 'react-icons/fi'
+import { FiHome, FiBook, FiSettings, FiCheckSquare } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import NextLink from 'next/link'
 import { pagesPath } from '~/utils/$path'
 import { useAuth } from '~/hooks/useAuth'
 import { AmplifyUser } from '@aws-amplify/ui'
+import { User } from '$/types'
 
 const DEFAULT_USER_ICON_PATH =
   'https://icon-library.com/images/anonymous-user-icon/anonymous-user-icon-16.jpg'
@@ -30,6 +31,7 @@ interface LinkItemProps {
   icon: IconType
   path: string
 }
+
 const LinkItems: Array<LinkItemProps> = [
   {
     name: 'Home',
@@ -40,6 +42,11 @@ const LinkItems: Array<LinkItemProps> = [
     name: 'Articles',
     icon: FiBook,
     path: pagesPath.article.$url().pathname
+  },
+  {
+    name: 'Tasks',
+    icon: FiCheckSquare,
+    path: pagesPath.tasks.$url().pathname
   },
   {
     name: 'Settings',
@@ -65,6 +72,7 @@ export default function SimpleSidebar() {
         display={{ base: 'none', md: 'block' }}
         userIconPath={userIconPath}
         cognitoUser={cognitoUser}
+        user={user}
       />
       <Drawer
         autoFocus={false}
@@ -91,12 +99,14 @@ interface SidebarProps extends BoxProps {
   onClose: () => void
   userIconPath: string
   cognitoUser?: AmplifyUser
+  user?: User | null
 }
 
 const SidebarContent = ({
   onClose,
   userIconPath,
   cognitoUser,
+  user,
   ...rest
 }: SidebarProps) => {
   return (
@@ -122,7 +132,9 @@ const SidebarContent = ({
             <Box>
               <HStack>
                 <Avatar src={userIconPath} />
-                <Text fontSize={'sm'}>{'TODO: NAME'}</Text>
+                <Text fontSize={'sm'}>
+                  {user?.user_name ?? 'Anonymous User'}
+                </Text>
               </HStack>
             </Box>
           ) : null}

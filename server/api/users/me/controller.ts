@@ -8,7 +8,6 @@ export type AdditionalRequest = {
 
 export default defineController(() => ({
   get: async ({ user }) => {
-    console.log(user)
     const authUser = await getUserByCognitoUserId({ cognitoUserId: user.id })
 
     return {

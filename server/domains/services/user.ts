@@ -48,6 +48,23 @@ export const uploadUserIcon = async ({
     })
 }
 
+export const updateUserInfo = async ({
+  cognito_id,
+  user_name
+}: {
+  cognito_id: User['cognito_id']
+  user_name: User['user_name']
+}) => {
+  return await prisma.user.update({
+    where: {
+      cognito_id
+    },
+    data: {
+      user_name
+    }
+  })
+}
+
 export const getUserByCognitoUserId = async ({
   cognitoUserId
 }: {
