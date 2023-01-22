@@ -4,6 +4,7 @@ import {
   Heading,
   Button,
   FormControl,
+  FormErrorMessage,
   Input,
   useToast
 } from '@chakra-ui/react'
@@ -83,7 +84,7 @@ const TaskManagementPage: NextPage = () => {
           }}
           validationSchema={toFormikValidationSchema(formSchema)}
         >
-          {({ values }) => (
+          {({ values, errors }) => (
             <Form>
               <Field name="label">
                 {({ field, form }: FieldProps<FormValue, FormValue>) => (
@@ -96,6 +97,7 @@ const TaskManagementPage: NextPage = () => {
                       name="label"
                       required
                     />
+                    <FormErrorMessage>{form.errors.label}</FormErrorMessage>
                   </FormControl>
                 )}
               </Field>
@@ -104,6 +106,7 @@ const TaskManagementPage: NextPage = () => {
                 colorScheme="teal"
                 type="submit"
                 isLoading={isAddingTask}
+                isDisabled={!!errors.label}
               >
                 Add
               </Button>
