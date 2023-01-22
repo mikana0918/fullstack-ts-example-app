@@ -55,7 +55,14 @@ const TaskManagementPage: NextPage = () => {
 
   const deleteTask = useCallback(async (task: Task) => {
     await apiClient.tasks._taskId(task.id).delete()
-    mutate()
+    await mutate()
+
+    toast({
+      title: 'Deleted the task 🗑',
+      status: 'error',
+      duration: 2000,
+      isClosable: true
+    })
   }, [])
 
   const initialValues = {
