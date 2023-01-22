@@ -15,7 +15,7 @@ import {
   Avatar,
   Text
 } from '@chakra-ui/react'
-import { FiHome, FiBook, FiSettings } from 'react-icons/fi'
+import { FiHome, FiBook, FiSettings, FiCheckSquare } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import NextLink from 'next/link'
 import { pagesPath } from '~/utils/$path'
@@ -31,6 +31,7 @@ interface LinkItemProps {
   icon: IconType
   path: string
 }
+
 const LinkItems: Array<LinkItemProps> = [
   {
     name: 'Home',
@@ -41,6 +42,11 @@ const LinkItems: Array<LinkItemProps> = [
     name: 'Articles',
     icon: FiBook,
     path: pagesPath.article.$url().pathname
+  },
+  {
+    name: 'Tasks',
+    icon: FiCheckSquare,
+    path: pagesPath.tasks.$url().pathname
   },
   {
     name: 'Settings',
