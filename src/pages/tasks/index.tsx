@@ -1,13 +1,19 @@
-import type { FormEvent, ChangeEvent } from 'react'
-import { Box, Heading, Button, FormControl, Input } from '@chakra-ui/react'
 import { useCallback } from 'react'
+import {
+  Box,
+  Heading,
+  Button,
+  FormControl,
+  Input,
+  useToast
+} from '@chakra-ui/react'
 import useAspidaSWR from '@aspida/swr'
 import styles from '~/styles/Home.module.scss'
 import { apiClient } from '~/utils/apiClient'
 import type { Task } from '@prisma/client'
 import { useNextHeadMutation } from '~/store/useNextHeadMutation'
 import type { NextPage } from 'next'
-import { Field, Form, Formik, FieldProps, FormikState } from 'formik'
+import { Field, Form, Formik, FieldProps } from 'formik'
 import { z } from 'zod'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
 
@@ -22,11 +28,20 @@ const formSchema = z.object({
 const TaskManagementPage: NextPage = () => {
   useNextHeadMutation('タスク')
 
+  const toast = useToast()
+
   const { data: tasks, error, mutate } = useAspidaSWR(apiClient.tasks)
 
   const handleSubmit = async (params: FormValue) => {
     await apiClient.tasks.post({ body: { label: params.label } })
-    mutate()
+    await mutate()
+
+    toast({
+      title: 'Added new task ✅',
+      status: 'success',
+      duration: 4000,
+      isClosable: true
+    })
   }
 
   const toggleDone = useCallback(async (task: Task) => {
