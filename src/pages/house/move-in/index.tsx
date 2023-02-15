@@ -3,14 +3,9 @@ import { useNextHeadMutation } from '~/store/useNextHeadMutation'
 import {
   Box,
   Button,
-  Input,
   FormControl,
   FormLabel,
-  FormHelperText,
-  FormErrorMessage,
   Heading,
-  Image,
-  useToast,
   RadioGroup,
   Stack,
   Radio
@@ -18,6 +13,8 @@ import {
 import { Field, Form, Formik, FieldProps } from 'formik'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
 import { z } from 'zod'
+import { pagesPath } from '~/utils/$path'
+import { useRouter } from 'next/router'
 
 interface FormValue {
   // TODO
@@ -30,12 +27,15 @@ const formSchema = z.object({
 const Page: NextPage = () => {
   useNextHeadMutation('転入のお手続き')
 
+  const router = useRouter()
+
   const initialValues = {
     //TODO
   }
 
   const handleSubmit = () => {
-    console.log('TODO: Please handle this: handleSubmit')
+    // TODO: add sumission logics
+    router.push(pagesPath.house.move_in.result.$url().pathname)
   }
 
   return (
