@@ -15,6 +15,9 @@ export const pagesPath = {
     $url: (url?: { hash?: string }) => ({ pathname: '/family' as const, hash: url?.hash })
   },
   "house": {
+    "move_in": {
+      $url: (url?: { hash?: string }) => ({ pathname: '/house/move-in' as const, hash: url?.hash })
+    },
     $url: (url?: { hash?: string }) => ({ pathname: '/house' as const, hash: url?.hash })
   },
   "settings": {
@@ -32,6 +35,9 @@ export const staticPath = {
   category_death_jpeg: '/fullstack-ts-example-app/category-death.jpeg',
   category_marry_jpeg: '/fullstack-ts-example-app/category-marry.jpeg',
   category_move_jpeg: '/fullstack-ts-example-app/category-move.jpeg',
+  category_sub_move_in_jpeg: '/fullstack-ts-example-app/category-sub-move-in.jpeg',
+  category_sub_move_out_jpeg: '/fullstack-ts-example-app/category-sub-move-out.jpeg',
+  category_sub_reloction_jpeg: '/fullstack-ts-example-app/category-sub-reloction.jpeg',
   favicon_png: '/fullstack-ts-example-app/favicon.png',
   vercel_svg: '/fullstack-ts-example-app/vercel.svg'
 } as const

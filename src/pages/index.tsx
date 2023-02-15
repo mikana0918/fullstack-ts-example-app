@@ -1,6 +1,14 @@
 import type { NextPage } from 'next'
 import { useNextHeadMutation } from '~/store/useNextHeadMutation'
-import { Link, Card, CardBody, Flex, Image, Heading } from '@chakra-ui/react'
+import {
+  Box,
+  Link,
+  Card,
+  CardBody,
+  Flex,
+  Image,
+  Heading
+} from '@chakra-ui/react'
 import { staticPath } from '~/utils/$path'
 import NextLink from 'next/link'
 import { pagesPath } from '~/utils/$path'
@@ -9,7 +17,7 @@ const Home: NextPage = () => {
   useNextHeadMutation('トップ')
 
   return (
-    <>
+    <Box width={'100vw'}>
       <Heading mb="8">何を申請しますか?</Heading>
 
       <Flex>
@@ -41,7 +49,7 @@ const Home: NextPage = () => {
           </Card>
         </Link>
       </Flex>
-    </>
+    </Box>
   )
 }
 
