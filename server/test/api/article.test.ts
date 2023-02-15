@@ -26,6 +26,8 @@ describe('Test api/articles', () => {
 
         expect(res.body).toContainEqual(articleInfoList)
       })
-      .catch((err) => console.error(err))
+      .catch((err) => {
+        throw err
+      })
   })
 })
